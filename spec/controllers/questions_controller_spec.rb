@@ -30,4 +30,26 @@ RSpec.describe QuestionsController, type: :controller do
       expect(response).to render_template :show
     end
   end
+
+  describe "GET #new" do
+    before { get :new }
+
+    it "question should be eq new Question" do
+      expect(assigns(:question)).to be_a_new(Question)
+    end
+
+    it "render new view" do
+      expect(response).to render_template(:new)
+    end
+  end
+
+  describe "POST create" do
+    context "with valid attributes" do
+      
+    end
+
+    context "with invalid attributes" do
+      
+    end
+  end
 end
