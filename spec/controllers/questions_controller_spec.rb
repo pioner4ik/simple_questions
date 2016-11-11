@@ -31,82 +31,96 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
-  describe "GET #new" do
+  describe 'GET #new' do
     before { get :new }
 
-    it "question should be eq new Question" do
+    it 'question should be eq new Question' do
       expect(assigns(:question)).to be_a_new(Question)
     end
 
-    it "render new view" do
+    it 'render new view' do
       expect(response).to render_template(:new)
     end
   end
 
-  describe "GET #edit" do
+  describe 'GET #edit' do
     before { get :edit, params: { id: question } }
 
-    it "assings the requested question to @question" do
+    it 'assings the requested question to @question' do
       expect(assigns(:question)).to eq(question)
     end
 
-    it "render edit view" do
+    it 'render edit view' do
       expect(response).to render_template(:edit)
     end
   end
-=begin
+
   describe 'POST #create' do
+    let(:qn_params) do
+      { question: { title: 'title', body: 'body' } }
+    end
+
     context 'with valid attributes' do
       it 'saves the new question in the database' do
-        expect { process :create,
-                 method: :post,
-                 params: { question: attributes_for(:question)}
-               }.to change(Question, :count).by(1)
+        expect do
+          process :create,
+                  method: :post,
+                  params: qn_params
+        end.to change(Question, :count).by(1)
       end
 
       it 'redirects to show view' do
-        process :create, method: :post, params: { question: attributes_for(:question) }
+        post :create, params: qn_params
         expect(response).to redirect_to question_path(assigns(:question))
       end
     end
 
-    context "with invalid attributes" do
-      it "does not save the question" do
-        expect { process :create,
-                 method: :post,
-                 params: { question: attributes_for(:invalid_question) }
-                }.to_not change(Question, :count)
+    context 'with invalid attributes' do
+      it 'does not save the question' do
+        expect do
+          process :create,
+                  method: :post,
+                  params: { question: attributes_for(:invalid_question) }
+        end.to_not change(Question, :count)
       end
 
-      it "re-renders new view" do
-        process :create, method: :post, params: { question: attributes_for(:invalid_question) }
+      it 're-renders new view' do
+        process :create,
+                method: :post,
+                params: { question: attributes_for(:invalid_question) }
         expect(response).to render_template :new
       end
     end
   end
-=end
+
   describe 'PATCH #update' do
     context 'valid attributes' do
       it 'assings the requested question to @question' do
-        process :update, method: :post, params: { id: question, question: attributes_for(:question)}
+        process :update, method: :post, params: { id: question, question: attributes_for(:question) }
         expect(assigns(:question)).to eq question
       end
 
       it 'changes question attributes' do
-        process :update, method: :post, params: { id: question, question: { title: 'new title', body: 'new body'}}
+        process :update, method: :post, params: { id: question, question: { title: 'new title', body: 'new body' } }
         question.reload
         expect(question.title).to eq 'new title'
         expect(question.body).to eq 'new body'
       end
 
       it 'redirects to the updated question' do
-        process :update, method: :post, params: { id: question, question: attributes_for(:question) }
+        process :update,
+                method: :post,
+                params: { id: question, question: attributes_for(:question) }
         expect(response).to redirect_to question
       end
     end
 
     context 'invalid attributes' do
-      before { process :update, method: :post, params: { id: question, question: { title: 'new title', body: nil} } }
+      before do
+        process :update,
+                method: :post,
+                params: { id: question, question: { title: 'new title', body: nil } }
+      end
 
       it 'does not change question attributes' do
         question.reload

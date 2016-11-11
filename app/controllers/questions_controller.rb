@@ -9,14 +9,16 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = Question.new
+    @user = User.create
+    @question = @user.questions.build
   end
 
   def edit
   end
-=begin
+
   def create
-    @question = Question.new(question_params)
+    @user = User.create
+    @question = @user.questions.build(question_params)
 
     if @question.save
       redirect_to @question
@@ -24,7 +26,7 @@ class QuestionsController < ApplicationController
       render :new
     end
   end
-=end
+
   def update
     if @question.update_attributes(question_params)
       redirect_to @question
@@ -35,11 +37,11 @@ class QuestionsController < ApplicationController
 
   private
 
-    def set_question
-      @question = Question.find(params[:id])
-    end
+  def set_question
+    @question = Question.find(params[:id])
+  end
 
-    def question_params
-      params.require(:question).permit(:title, :body)
-    end
+  def question_params
+    params.require(:question).permit(:title, :body)
+  end
 end
