@@ -42,6 +42,18 @@ RSpec.describe QuestionsController, type: :controller do
       expect(response).to render_template(:new)
     end
   end
+
+  describe "GET #edit" do
+    before { get :edit, params: { id: question } }
+
+    it "assings the requested question to @question" do
+      expect(assigns(:question)).to eq(question)
+    end
+
+    it "render edit view" do
+      expect(response).to render_template(:edit)
+    end
+  end
 =begin
   describe 'POST #create' do
     context 'with valid attributes' do
