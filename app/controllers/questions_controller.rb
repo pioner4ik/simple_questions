@@ -9,17 +9,15 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @user = User.create
-    @question = @user.questions.build
+    @question = Question.new
   end
 
   def edit
   end
 
   def create
-    @user = User.create
-    @question = @user.questions.build(question_params)
-
+    @question = Question.new(question_params)
+    
     if @question.save
       redirect_to @question
     else

@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
-  let(:user) { create(:user) }
+  let(:question) { create(:question) }
 
   describe 'GET #index' do
-    let(:questions) { create_list(:question, 2, user_id: user.id) }
+    let(:questions) { create_list(:question, 2) }
 
     before { get :index }
 
@@ -16,8 +16,6 @@ RSpec.describe QuestionsController, type: :controller do
       expect(response).to render_template :index
     end
   end
-
-  let(:question) { create(:question, user_id: user.id) }
 
   describe 'GET #show' do
     before { get :show, params: { id: question } }
