@@ -54,7 +54,7 @@ RSpec.describe QuestionsController, type: :controller do
       expect(response).to render_template(:edit)
     end
   end
-=begin
+
   describe 'POST #create' do
     context 'with valid attributes' do
       it 'saves the new question in the database' do
@@ -84,7 +84,7 @@ RSpec.describe QuestionsController, type: :controller do
       end
     end
   end
-=end
+
   describe 'PATCH #update' do
     context 'valid attributes' do
       it 'assings the requested question to @question' do
