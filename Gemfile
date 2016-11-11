@@ -28,6 +28,11 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'paperclip', '~> 5.0.0.beta1'
+gem 'bootstrap', '~> 4.0.0.alpha3'
+gem 'haml'
+# gem 'simple_form'
+gem 'rails-controller-testing'
 
 group :development, :test do
   gem 'rspec-rails'
