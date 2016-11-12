@@ -12,7 +12,7 @@ RSpec.describe AnswersController, type: :controller do
         expect { process :create,
                  method: :post,
                  params: params
-                }.to change( Answer, :count).by(1)
+                }.to change( question.answers, :count).by(1)
       end
 
       it "should redirect to question and show success message" do
@@ -27,7 +27,7 @@ RSpec.describe AnswersController, type: :controller do
         expect { process :create,
                  method: :post,
                  params: { answer: attributes_for(:invalid_answer), question_id: question }
-                }.to_not change(question.answers, :count)
+                }.to_not change(Answer, :count)
       end
 
       it "render actin new and show error messages" do
