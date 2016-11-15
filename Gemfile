@@ -31,7 +31,7 @@ gem 'jbuilder', '~> 2.5'
 gem "paperclip", "~> 5.0.0.beta1"
 gem 'bootstrap', '~> 4.0.0.alpha3'
 gem 'haml'
-#gem 'simple_form'
+gem 'simple_form'
 gem 'rails-controller-testing'
 
 group :development, :test do
@@ -42,6 +42,7 @@ end
 
 group :test do
   gem 'shoulda-matchers'
+  gem 'capybara'
 end
 
 # gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
