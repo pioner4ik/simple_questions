@@ -9,7 +9,12 @@
   %body
     .navbar.navbar-fixed-top.bg-inverse.navbar-dark
       .container
-        - unless user_signed_in?
+        - if user_signed_in?
+          .nav.navbar-nav.float-lg-right
+            .nav-item.nav-link.active
+              = link_to "Log out", destroy_user_session_path(@user),
+              method: :delete, class: "btn btn-sm btn-info"
+        -else      
           .nav.navbar-nav.float-lg-right
             .nav-item.nav-link.active
               = link_to "New user?", new_user_registration_path(@user),
@@ -17,12 +22,12 @@
             .nav-item.nav-link.active
               = link_to "Sign in", new_user_session_path(@user),
               class: "btn btn-sm btn-info"    
-        - else      
-          .nav.navbar-nav.float-lg-right
-            .nav-item.nav-link.active
-              = link_to "Log out", destroy_user_session_path(@user),
-              method: :delete, class: "btn btn-sm btn-info"
-    %p.notice= notice
-    %p.alert= alert
+    .navbar.navbar-static-top{style:"margin-top:-20px;"}
+      .container
+        .navbar.navbar-brand
+          %h3= link_to "Simple Questions", root_path, id: "logotip"
+        %h1.float-xs-right#ask_button
+          = link_to "Ask question", new_question_path, class: "btn btn-warning"
+        = render 'layouts/messages'
 
-    = yield
+        = yield

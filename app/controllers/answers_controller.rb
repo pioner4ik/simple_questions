@@ -1,14 +1,13 @@
 class AnswersController < ApplicationController
-
+  before_action :authenticate_user!
   def create
     @question = Question.find(params[:question_id])
     @answer = @question.answers.build(answer_params)
-
+    @answer.user_id = current_user.id
+    
     if @answer.save
-      redirect_to @question
       flash[:success] = "Congratulations! Answer created!"
     else
-      render :new
       flash[:error] = "Answer is not created! Try later!"
     end
   end

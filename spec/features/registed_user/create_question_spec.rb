@@ -14,12 +14,19 @@ feature "Create question", %q{
     fill_in "Password", with: "123456"
     click_on "Log in"
 
-    visit question_path
+    visit questions_path
     click_on "Ask question"
     fill_in "Title", with: "Test question"
     fill_in "Body", with: "Anybody"
-    click on "Create"
+    click_on "Create"
 
     expect(page).to have_content "Your question successfully created."
+  end
+
+  scenario "Non-authenticated user create question" do
+    visit questions_path
+    click_on "Ask question"
+
+    expect(page).to have_content "You need to sign in or sign up before continuing."
   end
 end
