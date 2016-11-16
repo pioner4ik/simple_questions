@@ -32,7 +32,7 @@ RSpec.describe AnswersController, type: :controller do
       it "render action new and show error messages" do
         process :create, method: :delete,
                 params: { answer: attributes_for(:invalid_answer), question_id: question }
-        expect(flash[:error]).to be_present
+        expect(flash[:danger]).to be_present
       end
     end
   end

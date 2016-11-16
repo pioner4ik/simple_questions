@@ -21,13 +21,14 @@
               class: "btn btn-sm btn-outline-info"
             .nav-item.nav-link.active
               = link_to "Sign in", new_user_session_path(@user),
-              class: "btn btn-sm btn-info"    
-    .navbar.navbar-static-top{style:"margin-top:-20px;"}
-      .container
+              class: "btn btn-sm btn-info"
+    .container          
+      .navbar.navbar-static-top{style:"margin-top:-20px;"}
         .navbar.navbar-brand
           %h3= link_to "Simple Questions", root_path, id: "logotip"
         %h1.float-xs-right#ask_button
           = link_to "Ask question", new_question_path, class: "btn btn-warning"
-        = render 'layouts/messages'
 
-        = yield
+      = render 'layouts/messages'
+      %br
+      = yield

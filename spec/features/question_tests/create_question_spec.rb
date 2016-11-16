@@ -7,12 +7,7 @@ feature "Create question", %q{
 } do
   
   scenario "Authenticated user create question" do
-    User.create(email: "user@test.ru", password: "123456")
-
-    visit new_user_session_path
-    fill_in "Email", with: "user@test.ru"
-    fill_in "Password", with: "123456"
-    click_on "Log in"
+    signup_user
 
     visit questions_path
     click_on "Ask question"

@@ -23,6 +23,7 @@ class QuestionsController < ApplicationController
       flash[:notice] = 'Your question successfully created.'
       redirect_to @question
     else
+      flash[:danger] = 'Try later'
       render :new
     end
   end

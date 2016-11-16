@@ -2,6 +2,7 @@ require 'rails_helper'
 
 feature "User sign in" do
   given(:user) { create(:user) }
+  
   scenario "Registed user try to sign in" do
     log_in(user)
 

@@ -1,8 +1,21 @@
 .col-xs-8
   .card
     .card-header
-      = @question.title
-    .card-block
+      %h3= @question.title
+    .card-block{style:"min-height:200px;"}
       = @question.body
-    %p.float-xs-right
+  %hr
+  - @question.answers.each do |answer|
+    %blockquote.blockquote
+      %p= answer.body
+      - if answer.user == current_user
+        = link_to "delete", question_answer_path(answer),
+        method: :delete, data: { cofirm: "Are you shure?"},
+        class:"btn btn-outline-danger float-xs-right"
+      .blockquote-footer= answer.user.email
+    %hr  
+  .offset-xs-4.col-xs-8
+    = simple_form_for [ @question, @question.answers.build ] do |f| 
+      = f.input :body, label: "Your answer"
+      = f.button :submit, "Create answer", class: "btn btn-info float-xs-right"
 
