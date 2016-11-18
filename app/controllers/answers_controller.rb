@@ -4,20 +4,20 @@ class AnswersController < ApplicationController
   def create
     @question = Question.find(params[:question_id])
     @answer = @question.answers.build(answer_params)
-    @answer.user_id = current_user.id
+    @answer.user = current_user
     
     if @answer.save
       flash[:success] = "Congratulations! Answer created!"
       redirect_to @question
     else
       flash[:danger] = "Answer is not created! Try later!"
-      redirect_to @question
+      render "questions/new" 
     end
   end
 
   def destroy
-    @answer = Answer.find(params[:question_id])
-    if current_user == @answer.user
+    @answer = Answer.find(params[:id])
+    if current_user.author_of?(@answer)
       flash[:success] = "Answer deleted!"
       @answer.destroy
       redirect_to questions_path

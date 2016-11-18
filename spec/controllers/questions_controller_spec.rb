@@ -60,7 +60,7 @@ RSpec.describe QuestionsController, type: :controller do
         expect { process :create,
                  method: :post,
                  params: { question: attributes_for(:question) }
-               }.to change(Question, :count).by(1)
+               }.to change(@user.questions, :count).by(1)
       end
 
       it 'redirects to show view' do
@@ -130,7 +130,7 @@ RSpec.describe QuestionsController, type: :controller do
   describe 'DELETE #destroy' do
     sign_in_user
 
-    context 'user can delete message' do
+    context 'author can delete message' do
       let(:question) { create(:question, user_id: @user.id) }
 
       before { question }
@@ -138,12 +138,25 @@ RSpec.describe QuestionsController, type: :controller do
       it 'should delete question' do
         expect { process :destroy,
                  method: :delete,
-                 params: { id: question } }.to change(Question, :count).by(-1)
+                 params: { id: question } }.to change(@user.questions, :count).by(-1)
       end
 
       it 'redirect to index views' do
         process :destroy, method: :delete, params: { id: question }
         expect(response).to redirect_to questions_path
+      end
+    end
+
+    context 'non author cant delete question' do
+      let(:other_user) { create(:user) }
+      let(:question)   { create(:question, user_id: other_user.id) }
+
+      before { question }
+
+      it "should not delete question" do
+         expect { process :destroy,
+                 method: :delete,
+                 params: { id: question } }.to_not change(Question, :count)
       end
     end
   end

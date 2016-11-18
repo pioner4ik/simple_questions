@@ -18,16 +18,14 @@ feature "Edit and delete buttons", %q{
     expect(page).to have_link "Delete question"
   end
 
-  scenario "click on button edit redirect to edit path" do
+  scenario "Wnem user click delete button" do
     log_in(user)
-
     visit question_path(question)
-    click_on "Edit question"
 
-    expect(current_path).to eq edit_question_path(question)
+    expect { click_on "Delete question" }.to change(user.questions, :count).by(-1)
   end
-
-  scenario "This_user can view edit and delete buttons" do
+  
+  scenario "Other user can't view edit and delete buttons" do
     log_in(other_user)
 
     visit question_path(question)

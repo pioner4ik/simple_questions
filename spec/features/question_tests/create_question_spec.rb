@@ -16,6 +16,22 @@ feature "Create question", %q{
     click_on "Create"
 
     expect(page).to have_content "Your question successfully created."
+    expect(:title).to be_present
+    expect(:body).to be_present
+  end
+
+  scenario "Authenticated user create question with invalid attributes" do
+    signup_user
+
+    visit questions_path
+    click_on "Ask question"
+    fill_in "Title", with: ""
+    fill_in "Body", with: ""
+    click_on "Create"
+
+    expect(page).to have_content "Titlecan't be blank"
+    expect(page).to have_content "Bodycan't be blank"
+    expect(page).to have_content "Error! Try later"
   end
 
   scenario "Non-authenticated user create question" do

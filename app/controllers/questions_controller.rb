@@ -23,7 +23,7 @@ class QuestionsController < ApplicationController
       flash[:notice] = 'Your question successfully created.'
       redirect_to @question
     else
-      flash[:danger] = 'Try later'
+      flash[:danger] = 'Error! Try later'
       render :new
     end
   end
@@ -37,7 +37,7 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    if @question.user == current_user
+    if current_user.author_of?(@question)
       @question.destroy
       redirect_to questions_path
     end
@@ -45,11 +45,11 @@ class QuestionsController < ApplicationController
 
   private
 
-  def set_question
-    @question = Question.find(params[:id])
-  end
+    def set_question
+      @question = Question.find(params[:id])
+    end
 
-  def question_params
-    params.require(:question).permit(:title, :body)
-  end
+    def question_params
+      params.require(:question).permit(:title, :body)
+    end
 end

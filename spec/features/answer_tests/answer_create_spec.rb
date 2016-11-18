@@ -16,6 +16,7 @@ Can create answer
     click_on "Create answer"
 
     expect(page).to have_content "Congratulations! Answer created!"
+    expect(page).to have_content "My Answer"
   end
 
   scenario "Authentication user just click button create answer" do
