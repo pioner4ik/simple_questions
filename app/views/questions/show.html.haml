@@ -13,7 +13,7 @@
     %blockquote.blockquote
       %p= answer.body
       - if user_signed_in? && current_user.author_of?(answer)
-        = link_to "delete", answer, method: :delete, data: { confirm: "Are you shure?"},
+        = link_to "delete",  answer, method: :delete, data: { confirm: "Are you shure?"},
         class:"btn btn-outline-danger float-xs-right"
       .blockquote-footer= answer.user.email
     %hr  

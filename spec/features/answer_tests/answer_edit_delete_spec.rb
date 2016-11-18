@@ -23,6 +23,14 @@ Can edit and delete this answer
     expect(page).to have_link "delete"
   end
 
+  scenario "it delete answer" do
+      log_in(user)
+      visit question_path(question)
+      click_on "delete"
+
+      expect(page).to have_no_content "AnswerText"
+  end
+
   scenario "Other authentication user cant view delete button" do
     log_in(other_user)
     visit question_path(question)

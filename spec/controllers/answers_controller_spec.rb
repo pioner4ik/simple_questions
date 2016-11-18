@@ -60,6 +60,14 @@ RSpec.describe AnswersController, type: :controller do
                  params: { id: answer } 
                  }.to change(question.answers, :count).by(-1)
       end
+
+      it "should render questions_path with valid message" do
+        process :destroy, method: :delete, params: { id: answer }
+
+        expect(response).to redirect_to questions_path
+        expect(flash[:success]).to be_present
+        expect(flash[:success]).to eq "Answer deleted!"
+      end
     end
 
     context "User is not author" do
@@ -75,6 +83,14 @@ RSpec.describe AnswersController, type: :controller do
                  method: :delete,
                  params: { id: answer } 
                 }.to_not change(Answer , :count)
+      end
+
+      it "should render questions_path with invalid message" do
+        process :destroy, method: :delete, params: { id: answer }
+
+        expect(response).to redirect_to questions_path
+        expect(flash[:danger]).to be_present
+        expect(flash[:danger]).to eq "Answer is not deleted! Please sign in as author!"
       end
     end
   end

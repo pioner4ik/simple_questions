@@ -9,22 +9,23 @@ feature "Edit and delete buttons", %q{
   given(:other_user)  { create(:user) }
   given(:question)    { create(:question, user_id: user.id) }
 
-  scenario "This_user can view edit and delete buttons" do
+  scenario "This_user can view delete button" do
     log_in(user)
-
     visit question_path(question)
 
-    expect(page).to have_link "Edit question"
+    #expect(page).to have_link "Edit question"
     expect(page).to have_link "Delete question"
   end
 
-  scenario "Wnem user click delete button" do
+  scenario "This_user click on delete buttons" do
     log_in(user)
     visit question_path(question)
+    click_on "Delete question"
 
-    expect { click_on "Delete question" }.to change(user.questions, :count).by(-1)
+    expect(page).to have_no_content "MyString"
+    expect(page).to have_no_content "MyText"
   end
-  
+ 
   scenario "Other user can't view edit and delete buttons" do
     log_in(other_user)
 

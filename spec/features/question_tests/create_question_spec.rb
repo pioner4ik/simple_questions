@@ -16,8 +16,8 @@ feature "Create question", %q{
     click_on "Create"
 
     expect(page).to have_content "Your question successfully created."
-    expect(:title).to be_present
-    expect(:body).to be_present
+    expect(page).to have_content "Test question"
+    expect(page).to have_content "Anybody"
   end
 
   scenario "Authenticated user create question with invalid attributes" do

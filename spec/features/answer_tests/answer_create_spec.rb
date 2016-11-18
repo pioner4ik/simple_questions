@@ -26,6 +26,7 @@ Can create answer
     click_on "Create answer"
 
     expect(page).to have_content "Answer is not created! Try later!"
+    expect(page).to have_content "Bodycan't be blank"
   end
 
   scenario "Non-authentication user can't create answer" do
