@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
-  let(:question) { create(:question) }
+  sign_in_user
+  let(:question) { create(:question, user_id: @user.id) }
 
   describe 'GET #index' do
-    let(:questions) { create_list(:question, 2) }
+    let(:questions) { create_list(:question, 2, user_id: @user.id) }
 
     before { get :index }
 
@@ -58,8 +59,8 @@ RSpec.describe QuestionsController, type: :controller do
       it 'saves the new question in the database' do
         expect { process :create,
                  method: :post,
-                 params: { question: attributes_for(:question)}
-               }.to change(Question, :count).by(1)
+                 params: { question: attributes_for(:question) }
+               }.to change(@user.questions, :count).by(1)
       end
 
       it 'redirects to show view' do
@@ -86,25 +87,33 @@ RSpec.describe QuestionsController, type: :controller do
   describe 'PATCH #update' do
     context 'valid attributes' do
       it 'assings the requested question to @question' do
-        process :update, method: :post, params: { id: question, question: attributes_for(:question)}
+        process :update,
+                method: :post,
+                params: { id: question, question: attributes_for(:question) }
         expect(assigns(:question)).to eq question
       end
 
       it 'changes question attributes' do
-        process :update, method: :post, params: { id: question, question: { title: 'new title', body: 'new body'}}
+        process :update,
+                method: :post,
+                params: { id: question, question: { title: 'new title', body: 'new body'}}
         question.reload
         expect(question.title).to eq 'new title'
         expect(question.body).to eq 'new body'
       end
 
       it 'redirects to the updated question' do
-        process :update, method: :post, params: { id: question, question: attributes_for(:question) }
+        process :update,
+                method: :post,
+                params: { id: question, question: attributes_for(:question) }
         expect(response).to redirect_to question
       end
     end
 
     context 'invalid attributes' do
-      before { process :update, method: :post, params: { id: question, question: { title: 'new title', body: nil} } }
+      before { process :update,
+                       method: :post,
+                       params: { id: question, question: { title: 'new title', body: nil} } }
 
       it 'does not change question attributes' do
         question.reload
@@ -114,6 +123,49 @@ RSpec.describe QuestionsController, type: :controller do
 
       it 're-renders edit view' do
         expect(response).to render_template :edit
+      end
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    sign_in_user
+
+    context 'author can delete message' do
+      let(:question) { create(:question, user_id: @user.id) }
+
+      before { question }
+      
+      it 'should delete question' do
+        expect { process :destroy,
+                 method: :delete,
+                 params: { id: question } }.to change(@user.questions, :count).by(-1)
+      end
+
+      it 'redirect to index views' do
+        process :destroy, method: :delete, params: { id: question }
+        
+        expect(response).to redirect_to questions_path
+        expect(flash[:success]).to be_present
+      end
+    end
+
+    context 'non author cant delete question' do
+      let(:other_user) { create(:user) }
+      let(:question)   { create(:question, user_id: other_user.id) }
+
+      before { question }
+
+      it "should not delete question" do
+         expect { process :destroy,
+                 method: :delete,
+                 params: { id: question } }.to_not change(Question, :count)
+      end
+
+      it 'redirect to index views' do
+        process :destroy, method: :delete, params: { id: question }
+        
+        expect(response).to redirect_to question
+        expect(flash[:danger]).to be_present
       end
     end
   end

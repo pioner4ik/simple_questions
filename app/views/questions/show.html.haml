@@ -1,0 +1,24 @@
+.col-xs-8
+  .card
+    .card-header
+      %h3= @question.title
+    .card-block{style:"min-height:200px;"}
+      = @question.body
+  - if user_signed_in? && current_user.author_of?(@question)   
+    = link_to "Edit question", edit_question_path(@question), class: "btn btn-outline-warning"
+    = link_to "Delete question", @question, method: :delete, data: { confirm: "Are you shure?"},
+    class: "btn btn-outline-danger"
+  %hr
+  - @question.answers.each do |answer|
+    %blockquote.blockquote
+      %p= answer.body
+      - if user_signed_in? && current_user.author_of?(answer)
+        = link_to "delete",  answer, method: :delete, data: { confirm: "Are you shure?"},
+        class:"btn btn-outline-danger float-xs-right"
+      .blockquote-footer= answer.user.email
+    %hr  
+  .offset-xs-4.col-xs-8
+    = simple_form_for [ @question, @question.answers.build ] do |f| 
+      = f.input :body, label: "Your answer"
+      = f.button :submit, "Create answer", class: "btn btn-info float-xs-right"
+

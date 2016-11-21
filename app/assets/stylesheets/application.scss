@@ -1,0 +1,22 @@
+/*
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap";
+
+body{
+  margin-top: 70px;
+}
+h2{
+  text-align: center;
+}
+#logotip{
+  text-decoration: none;
+  color: #F0AD4E;
+  font-weight: bold;
+  padding-top:20px;
+  &:hover{
+    color: #E29A00;
+  }
+}

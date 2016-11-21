@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: [:show, :edit, :update]
+  before_action :authenticate_user!, only: [ :new, :create ]
+  before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   def index
     @questions = Question.all
@@ -9,27 +10,40 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = Question.new
+    @question = current_user.questions.build
   end
 
   def edit
   end
 
   def create
-    @question = Question.new(question_params)
-    
+    @question = current_user.questions.build(question_params)
+
     if @question.save
+      flash[:notice] = 'Your question successfully created.'
       redirect_to @question
     else
+      flash[:danger] = 'Error! Try later'
       render :new
     end
   end
 
   def update
-    if @question.update_attributes(question_params)
+    if @question.update(question_params)
       redirect_to @question
     else
       render :edit
+    end
+  end
+
+  def destroy
+    if current_user.author_of?(@question)
+      @question.destroy
+      flash[:success] = "Question deleted!"
+      redirect_to questions_path
+    else
+      flash[:danger] = "Question is not deleted! Please sign in as author!"
+      redirect_to @question
     end
   end
 

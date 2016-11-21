@@ -33,11 +33,13 @@ gem 'bootstrap', '~> 4.0.0.alpha3'
 gem 'haml'
 gem 'simple_form'
 gem 'rails-controller-testing'
+gem 'devise'
 
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'listen'
+  gem 'launchy'
 end
 
 group :test do
