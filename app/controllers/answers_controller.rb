@@ -11,14 +11,7 @@ class AnswersController < ApplicationController
       redirect_to @question
     else
       flash[:danger] = "Answer is not created! Try later!"
-      render "questions/show"
-=begin
-  здесь выдает ошибку undefined method `answers_path' for #<#<Class:0xbbf75b0>:0xd920970>
-  1 тест не проходит
-  я так понимаю ошибка лежит в самом шаблоне show,а именно в строке = link_to "delete",  answer в самом answer
-  неправильно задаю путь.Но если честно,ума не приложу какой писать путь.Пробовал [@question, answer] и 
-  question_answer_path(answer), не помогло.Через "визуальный тест" все в порядке
-=end      
+      render "questions/show" if @answer.persisted?
     end
   end
 

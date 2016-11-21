@@ -11,13 +11,13 @@ RSpec.describe User, type: :model do
     let(:other_user) { create(:user) }
 
     it 'user is the author of the question' do
-      question = create(:question, user_id: user.id)
+      question = create(:question, user: user)
       
       expect(user).to be_author_of(question)
     end
 
     it 'user is not the not author of the question' do
-      question = create(:question, user_id: other_user.id )
+      question = create(:question, user: other_user)
 
       expect(user).to_not be_author_of(question)
     end

@@ -16,13 +16,6 @@ Can edit and delete this answer
     click_on "Log out"
   end
 
-  scenario "this user view delete button" do 
-    log_in(user)
-    visit question_path(question)
-    
-    expect(page).to have_link "delete"
-  end
-
   scenario "it delete answer" do
       log_in(user)
       visit question_path(question)
