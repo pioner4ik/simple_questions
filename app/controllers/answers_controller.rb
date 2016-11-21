@@ -5,7 +5,6 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     @answer = @question.answers.build(answer_params)
     @answer.user = current_user
-    redirect_to @question
 
     if @answer.save
       flash[:success] = "Congratulations! Answer created!"
@@ -22,7 +21,7 @@ class AnswersController < ApplicationController
     else
       flash[:danger] = "Answer is not deleted! Please sign in as author!"
     end
-      redirect_to questions_path
+      redirect_to question_path(@answer.question)
   end
 
   private

@@ -10,6 +10,7 @@ RSpec.describe AnswersController, type: :controller do
       it "should create new answer in db" do
         expect { process :create,
                  method: :post,
+                 format: :js,
                  params: { answer: attributes_for(:answer), question_id: question }
                 }.to change(question.answers, :count).by(1)
       end
@@ -17,12 +18,13 @@ RSpec.describe AnswersController, type: :controller do
       it "should create new answer in db,with user who create it" do
         expect { process :create,
                  method: :post,
+                 format: :js,
                  params: { answer: attributes_for(:answer), question_id: question }
                 }.to change(@user.answers, :count).by(1)
       end
 
       it "should redirect to question and show success message" do
-        process :create, method: :post,
+        process :create, method: :post, format: :js,
                 params: { answer: attributes_for(:answer), question_id: question }
         expect(flash[:success]).to be_present
       end
@@ -32,12 +34,13 @@ RSpec.describe AnswersController, type: :controller do
       it "should not change answers count in db" do
         expect { process :create,
                  method: :post,
+                 format: :js,
                  params: { answer: attributes_for(:invalid_answer), question_id: question }
                 }.to_not change(Answer, :count)
       end
 
       it "render action new and show error messages" do
-        process :create, method: :post,
+        process :create, method: :post, format: :js,
                 params: { answer: attributes_for(:invalid_answer), question_id: question }
         expect(flash[:danger]).to be_present
       end
@@ -57,14 +60,15 @@ RSpec.describe AnswersController, type: :controller do
       it "should delete answer" do
         expect { process :destroy,
                  method: :delete,
+                 format: :js,
                  params: { id: answer } 
                  }.to change(question.answers, :count).by(-1)
       end
 
       it "should render questions_path with valid message" do
-        process :destroy, method: :delete, params: { id: answer }
+        process :destroy, method: :delete, format: :js, params: { id: answer }
 
-        expect(response).to redirect_to questions_path
+        expect(response).to redirect_to question_path(question)
         expect(flash[:success]).to be_present
         expect(flash[:success]).to eq "Answer deleted!"
       end
@@ -81,14 +85,15 @@ RSpec.describe AnswersController, type: :controller do
 
         expect { process :destroy,
                  method: :delete,
+                 format: :js,
                  params: { id: answer } 
                 }.to_not change(Answer , :count)
       end
 
       it "should render questions_path with invalid message" do
-        process :destroy, method: :delete, params: { id: answer }
+        process :destroy, method: :delete, format: :js, params: { id: answer }
 
-        expect(response).to redirect_to questions_path
+        expect(response).to redirect_to question_path(question)
         expect(flash[:danger]).to be_present
         expect(flash[:danger]).to eq "Answer is not deleted! Please sign in as author!"
       end
