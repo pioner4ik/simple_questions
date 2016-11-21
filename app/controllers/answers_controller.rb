@@ -5,13 +5,12 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     @answer = @question.answers.build(answer_params)
     @answer.user = current_user
-    
+    redirect_to @question
+
     if @answer.save
       flash[:success] = "Congratulations! Answer created!"
-      redirect_to @question
     else
       flash[:danger] = "Answer is not created! Try later!"
-      render "questions/show" if @answer.persisted?
     end
   end
 
