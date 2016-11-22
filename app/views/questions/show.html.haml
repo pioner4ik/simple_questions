@@ -10,12 +10,13 @@
     class: "btn btn-outline-danger"
   %hr
   .answers
-    = render 'answers'
+    = render @question.answers
   - if user_signed_in? 
     .offset-xs-4.col-xs-8
-      = simple_form_for [ @question, @answer ], remote: true do |f| 
+      = simple_form_for [ @question, @question.answers.build ], remote: true do |f| 
         = f.input :body, label: "Your answer"
         = f.button :submit, "Create answer", class: "btn btn-info float-xs-right"
   - else
-    %p.float-xs-right{ style:"color:red;"} Please sign in to answer!      
+    %p.float-xs-right{ style:"color:red;"} Please sign in to answer!
 
+    

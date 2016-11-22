@@ -1,0 +1,11 @@
+- if answer.persisted?
+  %blockquote.blockquote
+    %p= answer.body
+    - if user_signed_in? && current_user.author_of?(answer)
+      = link_to "delete", answer, method: :delete, data: { confirm: "Are you shure?"},
+      class:"btn btn-outline-danger"
+/На форуме написано что в create.js.erb можно передать 2 формы
+/(render @answer)  и (render "answer", answer: @answer)
+/во втором случае понятно что мы берем @answer из действия create контроллера Answers
+/присваиваем переменной answer @answer и рендерим шаблон _answer
+/Но как работает первый случай,как они понимают что делать?Это же вводит в заблуждение
