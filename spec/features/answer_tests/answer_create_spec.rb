@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'features_helper'
 
 feature "Create answer", %q{
 Other authentication user
@@ -20,7 +20,7 @@ Can create answer
       expect(page).to have_content "My Answer"
     end
   end
-=begin
+
   scenario "Authentication user click on create with invalid attr", js: true do
     log_in(other_user)
 
@@ -28,10 +28,10 @@ Can create answer
     fill_in "Your answer", with: nil
     click_on "Create answer"
 
-    expect(page).to have_content "Answer is not created! Try later!"
-    #expect(page).to have_content "Bodycan't be blank"
+    #expect(page).to have_content "Answer is not created! Try later!"
+    expect(page).to have_content "Body can't be blank"
   end  
-=end
+
   scenario "Non-authentication user can't create answer", js: true do
     visit question_path(question)
 

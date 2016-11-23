@@ -1,4 +1,4 @@
-require "rails_helper"
+require 'features_helper'
 
 feature "Edit and delete buttons", %q{
   User,who create this question

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'features_helper'
 
 feature "Delete answer", %q{
 Only user(this_user),who create this answer,
