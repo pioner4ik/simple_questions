@@ -1,4 +1,4 @@
-/*
+.edit-answer{ display: none; }/*
  *= require_tree .
  *= require_self
  */
@@ -20,3 +20,5 @@ h2{
     color: #E29A00;
   }
 }
+.edit-answer{ display: none; }
+#answer-41 { background-color: red;}

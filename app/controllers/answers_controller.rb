@@ -13,13 +13,18 @@ class AnswersController < ApplicationController
     end
   end
 
+  def update
+    @answer = Answer.find(params[:id])
+    @answer.update_attributes(answer_params) if current_user.author_of?(@answer)
+  end
+
   def destroy
     @answer = Answer.find(params[:id])
     if current_user.author_of?(@answer)
-      flash[:success] = "Answer deleted!"
+      #flash[:success] = "Answer deleted!"
       @answer.destroy
     else
-      flash[:danger] = "Answer is not deleted! Please sign in as author!"
+      #flash[:danger] = "Answer is not deleted! Please sign in as author!"
     end
       redirect_to question_path(@answer.question)
   end
