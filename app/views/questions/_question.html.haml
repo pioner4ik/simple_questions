@@ -2,10 +2,17 @@
   .card
     .card-header
       %h3= question.title
-    .card-block{style:"min-height:100px;"}
+    .card-block
       = question.body
-    .card-footer.text-xs-right
-      - if user_signed_in? && current_user.author_of?(question)   
-        = link_to "Edit question", edit_question_path(question), class: "btn btn-outline-warning"
+    - if user_signed_in? && current_user.author_of?(question)   
+      .card-footer
+        = simple_form_for question, remote: true,
+        html: { class: "edit-question", id: "edit-question-#{@question.id}"} do |f|
+          = f.input :title
+          = f.input :body
+          = f.submit "Save", class:"btn btn-sm btn-outline-success float-xs-left"
+
+        = link_to "Edit question", '', class: "edit-question-link btn btn-sm btn-outline-warning",
+        data: { question_id: @question.id }
         = link_to "Delete question", question, method: :delete, data: { confirm: "Are you shure?"},
-        class: "btn btn-outline-danger"
+        class: "btn btn-sm btn-outline-danger float-xs-right"

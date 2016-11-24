@@ -1,0 +1,10 @@
+$('.flash-messages').replaceWith("<%= j render "partials/flash" %>");
+$('.messages').delay(3000).fadeOut();
+
+<% if @question.errors.present? %>
+    <% @question.errors.full_messages.each do |message| %>
+      $('.error-messages').html('<%= j message %>');
+    <% end %>
+<% else %>
+  $('#question-' + <%= @question.id %> ).replaceWith("<%= j render partial: 'question', locals: { question: @question } %>");
+<% end %>

@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [ :new, :create ]
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_question, only: [:show, :update, :destroy]
 
   def index
     @questions = Question.all
@@ -12,9 +12,6 @@ class QuestionsController < ApplicationController
 
   def new
     @question = current_user.questions.build
-  end
-
-  def edit
   end
 
   def create
@@ -30,10 +27,14 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if @question.update(question_params)
-      redirect_to @question
+    if current_user.author_of?(@question)
+      if @question.update(question_params)
+        flash[:success] = "Your question succesfully updated!"
+      else
+        flash[:danger] = "Some problem, plz try later!"
+      end
     else
-      render :edit
+      flash[:warning] = "Plz sign in as autor of question!"
     end
   end
 

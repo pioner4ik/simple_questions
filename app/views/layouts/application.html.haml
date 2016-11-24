@@ -30,11 +30,12 @@
         %h1.float-xs-right#ask_button
           = link_to "Ask question", new_question_path, class: "btn btn-warning"
 
-      .col-xs-8
-        .flash-messages
-          = render 'partials/flash'
-        .error-messages
-          = render 'partials/errors'
+      .messages
+        .col-xs-8
+          .flash-messages
+            = render 'partials/flash'
+          .error-messages
+            = render 'partials/errors'
 
       %br
       = yield

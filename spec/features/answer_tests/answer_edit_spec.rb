@@ -35,7 +35,7 @@ feature "Answer editing", %q{
         click_on "Save"
 
         expect(page).to have_content "OtherAnswerText"
-        expect(page).to have_no_content "AnswerText"
+        expect(page).to have_no_content answer.body
         expect(page).to have_no_selector "textarea"
       end
     end
