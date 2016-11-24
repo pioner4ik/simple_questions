@@ -14,6 +14,6 @@
           = f.input :body
           = f.submit "Save", class:"btn btn-sm btn-outline-success"
           
-        = link_to "delete", answer, method: :delete,
+        = link_to "delete", answer, method: :delete, remote: true,
         class:"btn btn-sm btn-outline-danger"
     %hr    
