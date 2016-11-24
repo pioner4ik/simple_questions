@@ -115,8 +115,7 @@ RSpec.describe AnswersController, type: :controller do
         process :destroy, method: :delete, format: :js, params: { id: answer }
 
         expect(response).to redirect_to question_path(question)
-        #expect(flash[:success]).to be_present
-        #expect(flash[:success]).to eq "Answer deleted!"
+        expect(flash[:warning]).to eq "Answer deleted!"
       end
     end
 
@@ -140,8 +139,7 @@ RSpec.describe AnswersController, type: :controller do
         process :destroy, method: :delete, format: :js, params: { id: answer }
 
         expect(response).to redirect_to question_path(question)
-        #expect(flash[:danger]).to be_present
-        #expect(flash[:danger]).to eq "Answer is not deleted! Please sign in as author!"
+        expect(flash[:danger]).to eq "Answer is not deleted! Please sign in as author!"
       end
     end
   end

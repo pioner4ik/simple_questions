@@ -1,3 +1,5 @@
+$('.flash-messages').replaceWith("<%= j render "partials/flash" %>");
+
 <% if @answer.errors.present? %>
   <% @answer.errors.full_messages.each do |message| %>
     $('textarea#answer_body').before('<%= j message %>')

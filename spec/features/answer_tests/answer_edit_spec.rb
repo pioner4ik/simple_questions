@@ -33,7 +33,7 @@ feature "Answer editing", %q{
       within '.answer' do
         fill_in "Body", with: "OtherAnswerText"
         click_on "Save"
-        save_and_open_page
+
         expect(page).to have_content "OtherAnswerText"
         expect(page).to have_no_content "AnswerText"
         expect(page).to have_no_selector "textarea"

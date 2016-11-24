@@ -21,10 +21,10 @@ class AnswersController < ApplicationController
   def destroy
     @answer = Answer.find(params[:id])
     if current_user.author_of?(@answer)
-      #flash[:success] = "Answer deleted!"
+      flash[:warning] = "Answer deleted!"
       @answer.destroy
     else
-      #flash[:danger] = "Answer is not deleted! Please sign in as author!"
+      flash[:danger] = "Answer is not deleted! Please sign in as author!"
     end
       redirect_to question_path(@answer.question)
   end

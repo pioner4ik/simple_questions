@@ -21,21 +21,20 @@
               class: "btn btn-sm btn-outline-info"
             .nav-item.nav-link.active
               = link_to "Sign in", new_user_session_path(@user),
-              class: "btn btn-sm btn-info"
+              class: "btn btn-sm btn-info" 
 
-    .container
-      .flash-messages   
-        = render 'partials/flash'
-      .error-messages
-        = render 'partials/errors'   
-
-    .container          
-      .navbar.navbar-static-top{style:"margin-top:-20px;"}
+    .container         
+      .navbar.navbar-static-top
         .navbar.navbar-brand
           %h3= link_to "Simple Questions", root_path, id: "logotip"
         %h1.float-xs-right#ask_button
           = link_to "Ask question", new_question_path, class: "btn btn-warning"
 
-      %br
+      .col-xs-8
+        .flash-messages
+          = render 'partials/flash'
+        .error-messages
+          = render 'partials/errors'
 
+      %br
       = yield
