@@ -28,6 +28,14 @@ class AnswersController < ApplicationController
       redirect_to question_path(@answer.question)
   end
 
+  def mark_best
+    @question = @answer.question
+    @question.answers.each do |answer|
+      answer.update_attributes(best: false)
+    end
+    @answer.update_attributes(best: true)
+  end
+
   private
 
     def set_answer
@@ -35,6 +43,6 @@ class AnswersController < ApplicationController
     end
 
     def answer_params
-      params.require(:answer).permit(:body)
+      params.require(:answer).permit(:body, :best)
     end
 end

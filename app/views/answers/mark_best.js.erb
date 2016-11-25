@@ -1,0 +1,21 @@
+/*Не могу написать правильный js обработчик
+  Все что выжал из себя
+Вариант 1
+$('.make-best-button').click(function(e) {
+  e.preventDefault();
+  answer_id = $(this).data('answerId');
+  $("answer-" + answer_id).detach().preprendTo(".answers");
+});
+Вариант 2
+$('.make-best-button').click(function(e) {
+  e.preventDefault();
+  answer_id = $(this).data('answerId');
+  if (("#best-answer").is(":empty")) {
+    $("#best-answer").append($("answer-id" + answer_id ));
+  } else if (("#best-answer").is("*")) {
+    $("#best-answer").detach().prependTo($(".answers" ));
+    $("#best-answer").clildren().first().replaceWith($("#answer-" + answer_id));   
+  }
+});
+*/
+$('.answers').html(<%= render @answer %>);

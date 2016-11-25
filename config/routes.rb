@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   root to: "questions#index"
   
   resources :questions do
-    resources :answers, shallow: true
+    resources :answers, shallow: true do
+      member do
+        post :mark_best
+      end
+    end
   end
 
 end

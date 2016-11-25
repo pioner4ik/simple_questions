@@ -2,10 +2,10 @@
   = render @question
   %hr
 
-  .answers 
-    #best-answer
+  .answers
+    /#best-answer
     = render @question.answers
-    
+
   - if user_signed_in? 
     .offset-xs-4.col-xs-8
       = simple_form_for [ @question, @answer ], remote: true do |f| 
