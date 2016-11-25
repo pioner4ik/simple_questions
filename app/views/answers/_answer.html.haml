@@ -13,7 +13,12 @@
         html: { class:"edit-answer",id: "edit-answer-#{answer.id}"} do |f|
           = f.input :body
           = f.submit "Save", class:"btn btn-sm btn-outline-success"
-          
+
+        = link_to 'make best', '', remote: true, data: { answer_id: answer.id },
+        class: "make-best-button btn btn-sm btn-outline-info float-xs-right"
+
         = link_to "delete", answer, method: :delete, remote: true,
         class:"btn btn-sm btn-outline-danger"
+
+
     %hr    
