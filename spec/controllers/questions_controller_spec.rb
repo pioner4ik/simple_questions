@@ -42,18 +42,6 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
-  describe "GET #edit" do
-    before { get :edit, params: { id: question } }
-
-    it "assings the requested question to @question" do
-      expect(assigns(:question)).to eq(question)
-    end
-
-    it "render edit view" do
-      expect(response).to render_template(:edit)
-    end
-  end
-
   describe 'POST #create' do
     context 'with valid attributes' do
       it 'saves the new question in the database' do
@@ -89,6 +77,7 @@ RSpec.describe QuestionsController, type: :controller do
       it 'assings the requested question to @question' do
         process :update,
                 method: :post,
+                format: :js,
                 params: { id: question, question: attributes_for(:question) }
         expect(assigns(:question)).to eq question
       end
@@ -96,6 +85,7 @@ RSpec.describe QuestionsController, type: :controller do
       it 'changes question attributes' do
         process :update,
                 method: :post,
+                format: :js,
                 params: { id: question, question: { title: 'new title', body: 'new body'}}
         question.reload
         expect(question.title).to eq 'new title'
@@ -105,14 +95,16 @@ RSpec.describe QuestionsController, type: :controller do
       it 'redirects to the updated question' do
         process :update,
                 method: :post,
+                format: :js,
                 params: { id: question, question: attributes_for(:question) }
-        expect(response).to redirect_to question
+        expect(response).to render_template :update
       end
     end
 
     context 'invalid attributes' do
       before { process :update,
                        method: :post,
+                       format: :js,
                        params: { id: question, question: { title: 'new title', body: nil} } }
 
       it 'does not change question attributes' do
@@ -122,7 +114,7 @@ RSpec.describe QuestionsController, type: :controller do
       end
 
       it 're-renders edit view' do
-        expect(response).to render_template :edit
+        expect(response).to render_template :update
       end
     end
   end

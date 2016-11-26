@@ -1,19 +1,13 @@
 .col-xs-8
-  .card
-    .card-header
-      %h3= @question.title
-    .card-block{style:"min-height:100px;"}
-      = @question.body
-  - if user_signed_in? && current_user.author_of?(@question)   
-    = link_to "Edit question", edit_question_path(@question), class: "btn btn-outline-warning"
-    = link_to "Delete question", @question, method: :delete, data: { confirm: "Are you shure?"},
-    class: "btn btn-outline-danger"
+  = render @question
   %hr
+
   .answers
     = render @question.answers
+
   - if user_signed_in? 
     .offset-xs-4.col-xs-8
-      = simple_form_for [ @question, @question.answers.build ], remote: true do |f| 
+      = simple_form_for [ @question, @answer ], remote: true do |f| 
         = f.input :body, label: "Your answer"
         = f.button :submit, "Create answer", class: "btn btn-info float-xs-right"
   - else

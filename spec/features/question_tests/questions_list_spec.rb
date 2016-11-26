@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'features_helper'
 
 feature "Index page have a list of all questions" do
   let(:user) { create(:user) }

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'features_helper'
 
 feature "User sign in" do
   given(:user) { create(:user) }

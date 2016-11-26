@@ -1,4 +1,4 @@
-require "rails_helper"
+require 'features_helper'
 
 feature "Edit and delete buttons", %q{
   User,who create this question
@@ -22,14 +22,12 @@ feature "Edit and delete buttons", %q{
     log_in(other_user)
     visit question_path(question)
 
-    expect(page).to have_no_link "Edit question"
     expect(page).to have_no_link "Delete question"
   end
 
   scenario "Non-authentication user can't view edit and delete buttons" do
     visit question_path(question)
 
-    expect(page).to have_no_link "Edit question"
     expect(page).to have_no_link "Delete question"
   end
 end

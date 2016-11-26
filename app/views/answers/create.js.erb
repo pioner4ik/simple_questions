@@ -1,3 +1,11 @@
-$('.answers').append('<%= j render @answer %>');
-$('#answer_body').val('');
+$('.flash-messages').replaceWith("<%= j render "partials/flash" %>");
+$('.messages').delay(3000).fadeOut();
 
+<% if @answer.errors.present? %>
+  <% @answer.errors.full_messages.each do |message| %>
+    $('.error-messages').html('<%= j message %>');
+  <% end %>
+<% else %>
+  $('.answers').append('<%= j render @answer %>');
+  $('textarea#answer_body').val('');
+<% end %>

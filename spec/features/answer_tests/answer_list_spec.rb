@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'features_helper'
 
 feature "Question page have a list of all answers" do
   let(:user)      { create(:user) }

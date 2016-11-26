@@ -7,7 +7,7 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   %body
-    .navbar.navbar-fixed-top.bg-inverse.navbar-dark
+    %navbar.navbar.navbar-fixed-top.bg-inverse.navbar-dark
       .container
         - if user_signed_in?
           .nav.navbar-nav.float-lg-right
@@ -21,14 +21,21 @@
               class: "btn btn-sm btn-outline-info"
             .nav-item.nav-link.active
               = link_to "Sign in", new_user_session_path(@user),
-              class: "btn btn-sm btn-info"
-    .container          
-      .navbar.navbar-static-top{style:"margin-top:-20px;"}
+              class: "btn btn-sm btn-info" 
+
+    .container         
+      .navbar.navbar-static-top
         .navbar.navbar-brand
           %h3= link_to "Simple Questions", root_path, id: "logotip"
         %h1.float-xs-right#ask_button
           = link_to "Ask question", new_question_path, class: "btn btn-warning"
-      .errors-messages    
-        = render 'layouts/messages'   
+
+      .messages
+        .col-xs-8
+          .flash-messages
+            = render 'partials/flash'
+          .error-messages
+            = render 'partials/errors'
+
       %br
       = yield
