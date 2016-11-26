@@ -23,10 +23,6 @@ feature "Answer editing", %q{
       visit question_path(question)
     end
 
-    scenario "can see 'edit' link" do
-      expect(page).to have_link "Edit"
-    end
-
     scenario "try to edit answer", js: true do
       click_on "Edit"
 
@@ -49,9 +45,6 @@ feature "Answer editing", %q{
 
     scenario "can't see 'edit' link" do
       expect(page).to_not have_link "Edit"
-    end
-
-    scenario "try to edit answer" do
     end
   end
 end

@@ -144,13 +144,13 @@ RSpec.describe AnswersController, type: :controller do
     end
   end
 
-  describe "PATCH #best_answer" do
+  describe "PATCH #answer_best" do
     context "Author user" do
       let(:question)   { create(:question, user: @user) }
       let!(:answer)    { create(:answer, user: @user, question: question) }
 
       it "Authentication user as author" do
-        process :mark_best,
+        process :answer_best,
                 method: :patch,
                 format: :js,
                 params: { id: answer, question: question, user: @user } 
@@ -166,7 +166,7 @@ RSpec.describe AnswersController, type: :controller do
       let!(:answer)    { create(:answer, user: other_user, question: question) }
  
       it "Authentication user" do
-        process :mark_best,
+        process :answer_best,
         method: :patch,
         format: :js,
         params: { id: answer, question: question, user: @user } 
@@ -177,7 +177,7 @@ RSpec.describe AnswersController, type: :controller do
       end
 
       it "Non-authentication user" do
-        process :mark_best,
+        process :answer_best,
         method: :patch,
         format: :js,
         params: { id: answer, question: question, user: nil } 

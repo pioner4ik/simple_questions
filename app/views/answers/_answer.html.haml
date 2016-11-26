@@ -2,11 +2,12 @@
   
   .answer{ id: "answer-#{answer.id}"}
     .blockquote
+      - if answer.best?
+        .card.float-xs-right
+          %h3 Best answer 
       %p= answer.body
-      - if answer.best? 
-        %h3.float-xs-right{style:"color:#00426E;"} Best answer 
+
       - if user_signed_in? && current_user.author_of?(answer)
-        
         = link_to "Edit", '', 
         class: 'edit-answer-link btn btn-sm btn-outline-warning',
         data: { answer_id: answer.id }
@@ -15,8 +16,9 @@
         html: { class:"edit-answer",id: "edit-answer-#{answer.id}"} do |f|
           = f.input :body
           = f.submit "Save", class:"btn btn-sm btn-outline-success"
+
         - if !answer.best?
-          = link_to 'make best', mark_best_answer_path(answer), method: :patch,
+          = link_to 'make best', answer_best_answer_path(answer), method: :patch,
           remote: true,
           class: "make-best-button btn btn-sm btn-outline-info float-xs-right"
 
