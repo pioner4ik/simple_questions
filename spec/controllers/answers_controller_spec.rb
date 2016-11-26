@@ -143,4 +143,49 @@ RSpec.describe AnswersController, type: :controller do
       end
     end
   end
+
+  describe "PATCH #best_answer" do
+    context "Author user" do
+      let(:question)   { create(:question, user: @user) }
+      let!(:answer)    { create(:answer, user: @user, question: question) }
+
+      it "Authentication user as author" do
+        process :mark_best,
+                method: :patch,
+                format: :js,
+                params: { id: answer, question: question, user: @user } 
+        answer.reload
+
+        expect(answer.best).to eq true
+      end
+    end
+
+    context "Non-author users" do
+      let(:other_user) { create(:user) }
+      let(:question)   { create(:question, user: other_user) }
+      let!(:answer)    { create(:answer, user: other_user, question: question) }
+ 
+      it "Authentication user" do
+        process :mark_best,
+        method: :patch,
+        format: :js,
+        params: { id: answer, question: question, user: @user } 
+
+        answer.reload
+
+        expect(answer.best).to eq false
+      end
+
+      it "Non-authentication user" do
+        process :mark_best,
+        method: :patch,
+        format: :js,
+        params: { id: answer, question: question, user: nil } 
+        
+        answer.reload
+
+        expect(answer.best).to eq false
+      end
+    end
+  end
 end

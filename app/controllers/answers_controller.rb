@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_answer, except: [:create]
-  
+
   def create
     @question = Question.find(params[:question_id])
     @answer = @question.answers.build(answer_params)
@@ -30,10 +30,7 @@ class AnswersController < ApplicationController
 
   def mark_best
     @question = @answer.question
-    @question.answers.each do |answer|
-      answer.update_attributes(best: false)
-    end
-    @answer.update_attributes(best: true)
+    @answer.mark_answer_best if current_user.author_of?(@question)
   end
 
   private
