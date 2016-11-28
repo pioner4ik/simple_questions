@@ -34,6 +34,7 @@ gem 'haml'
 gem 'simple_form'
 gem 'rails-controller-testing'
 gem 'devise'
+gem 'cocoon'
 
 group :development, :test do
   gem 'rspec-rails'
