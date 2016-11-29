@@ -9,6 +9,12 @@
     .offset-xs-4.col-xs-8
       = simple_form_for [ @question, @answer ], remote: true do |f| 
         = f.input :body, label: "Your answer"
+        %p Attachment
+        .short_attachments
+          = f.simple_fields_for :attachments do |a|
+            = render 'partials/attachment_fields', f: a
+          .links
+            = link_to_add_association 'add attachment', f, :attachments, partial: "partials/attachment_fields"
         = f.button :submit, "Create answer", class: "btn btn-info float-xs-right"
   - else
     %p.float-xs-right{ style:"color:red;"} Please sign in to answer!

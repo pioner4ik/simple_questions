@@ -35,6 +35,7 @@ gem 'simple_form'
 gem 'rails-controller-testing'
 gem 'devise'
 gem 'cocoon'
+gem 'remotipart'
 
 group :development, :test do
   gem 'rspec-rails'

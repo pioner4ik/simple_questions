@@ -6,20 +6,20 @@ feature "Add files to answer", %q{
   I wanna be able to add some files
 } do
   given(:user)     { create(:user) }
-  given(:question) { create(:question) }
+  given(:question) { create(:question, user: user) }
 
   before do
     log_in user
-    visit new_question_path
+    visit question_path(question)
   end
 
-  scenario "User adds files to answer" do
-    fill_in "Body", with: "MyAnswer"
-    attach_file 'File', "#{Rails.root}/README.md"
-    click_on "Create"
+  scenario "User adds files to answer", js: true do
+    fill_in "Your answer", with: "MyAnswer"
+    attach_file 'File', "#{Rails.root}/Rakefile"
+    click_on "Create answer"
 
     within ".answers" do
-      expect(page).to have_link "README.md", href: "/uploads/attachment/file/1/README.md"
+      expect(page).to have_link "Rakefile", href: "/uploads/attachment/file/1/Rakefile"
     end
   end
 end
