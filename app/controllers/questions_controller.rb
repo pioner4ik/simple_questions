@@ -29,6 +29,7 @@ class QuestionsController < ApplicationController
 
   def update
     if current_user.author_of?(@question)
+
       if @question.update(question_params)
         flash[:success] = "Your question succesfully updated!"
       else

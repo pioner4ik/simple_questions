@@ -6,7 +6,7 @@ $('.messages').delay(3000).fadeOut();
       $('.error-messages').html('<%= j message %>');
     <% end %>
 <% else %>
-  $('#answer-' + <%= @answer.id %> ).replaceWith("<%= j render partial: 'answer', locals: { answer: @answer } %>");
+  $('#answer-' + <%= @answer.id %> ).replaceWith("<%= j render @answer %>");
 <% end %>
 
 

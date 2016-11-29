@@ -8,9 +8,9 @@ class AnswersController < ApplicationController
     @answer.user = current_user
 
     if @answer.save
-      flash[:success] = "Congratulations! Answer created!"
+      flash.now[:success] = "Congratulations! Answer created!"
     else
-      flash[:danger] = "Answer is not created! Try later!"
+      flash.now[:danger] = "Answer is not created! Try later!"
     end
   end
 

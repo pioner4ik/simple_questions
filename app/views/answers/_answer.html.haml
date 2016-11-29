@@ -8,7 +8,7 @@
       %p= answer.body
 
       - if user_signed_in? && current_user.author_of?(answer)
-        = link_to "Edit", '', 
+        = link_to "Edit", '',
         class: 'edit-answer-link btn btn-sm btn-outline-warning',
         data: { answer_id: answer.id }
         
