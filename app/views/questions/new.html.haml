@@ -8,5 +8,5 @@
       = f.simple_fields_for :attachments do |a|
         = render 'partials/attachment_fields', f: a
       .links
-        = link_to_add_association 'add attachment', f, :attachments, partial: "partials/attachment_fields"
+        = link_to_add_association 'add', f, :attachments, partial: "partials/attachment_fields"
     = f.button :submit, "Create", class: "btn btn-info float-xs-right"
