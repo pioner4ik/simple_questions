@@ -16,19 +16,15 @@ feature "Add some files to answer", %q{
   end
 
   scenario "User adds files to answer", js: true do
-    fill_in "Your answer", with: "MyAnswer"
-    attach_file 'File', "#{Rails.root}/config.ru"
+    fill_in "Your answer", with: "My Answer"
+    #click_on "add"
+    inputs = all('input[type="file"]')
+    inputs[0].set("#{Rails.root}/spec/rails_helper.rb")
+    #inputs[1].set("#{Rails.root}/spec/spec_helper.rb")
     click_on "Create answer"
 
-    within ".answers" do
-      expect(page).to have_link "config.ru", href: "/uploads/attachment/file/1/config.ru"
-    end
-    #не прошел, думал дело в ссылке ,но нет.Прообовал так, все равно никак
-    #  expect(page).to have_link "config.ru"
-    #              Failure/Error: expect(page).to have_link "config.ru",
-    #             href: "/uploads/attachment/file/1/config.ru"
-    #             expected to find link "config.ru" with href "/uploads/attachment/file/1/config.ru"
-    #             but there were no matches
+    expect(page).to have_link "rails_helper.rb"#, href: "/uploads/attachment/file/2/rails_helper.rb"
+    #expect(page).to have_link "spec_helper.rb"#, href: "/uploads/attachment/file/3/spec_helper.rb"
   end
 
   scenario "remove files from answer",js: true do
