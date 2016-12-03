@@ -3,11 +3,11 @@ require 'capybara/poltergeist'
 
 Capybara.javascript_driver = :poltergeist
 
-#Capybara.default_wait_time = 5
+#Capybara.default_max_wait_time = 10
 
 RSpec.configure do |config|
   config.include AcceptanceMacros, type: :feature
-
+  
   config.use_transactional_fixtures = false
 
   config.before(:suite) do
