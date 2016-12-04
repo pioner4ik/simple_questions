@@ -1,24 +1,28 @@
 .question{ id: "question-#{question.id}"}  
-  .card
-    .card-header
+  .card.card-block
+    .card-title
       %h3= question.title
-    .card-block
-      = question.body
-      %ul
-        - @question.attachments.each do |a|
-          %li{id: "attachment-#{a.id}"}
-            = link_to a.file.identifier, a.file.url
-            - if user_signed_in? && a.persisted? && current_user.author_of?(a.attachable)
-              = link_to "del", a, method: :delete, remote: true, class: "btn btn-sm btn-danger"
-    - if user_signed_in? && current_user.author_of?(question)   
-      .card-footer
-        = simple_form_for question, remote: true,
-        html: { class: "edit-question", id: "edit-question-#{@question.id}"} do |f|
-          = f.input :title
-          = f.input :body
-          = f.submit "Save", class:"btn btn-sm btn-outline-success float-xs-left"
+      %hr
+    .card-text
+      %p= question.body
+      .attach_list
+        %ul
+          - @question.attachments.each do |a|
+            %li{id: "attachment-#{a.id}"}
+              .fa.fa-file-o
+              = link_to a.file.identifier, a.file.url, style: "h1"
+              - if user_signed_in? && a.persisted? && current_user.author_of?(a.attachable)
+                = link_to "del", a, method: :delete, remote: true, class: "btn red"
+                
+        - if user_signed_in? && current_user.author_of?(question)
+          = simple_form_for question, remote: true,
+          html: { class: "edit-question", id: "edit-question-#{@question.id}"} do |f|
+            = f.input :title
+            = f.input :body
+            = f.submit "Save", class:"btn btn-sm btn-outline-success float-xs-left"
 
-        = link_to "Edit question", '', class: "edit-question-link btn btn-sm btn-outline-warning",
-        data: { question_id: @question.id }
-        = link_to "Delete question", question, method: :delete, data: { confirm: "Are you shure?"},
-        class: "btn btn-sm btn-outline-danger float-xs-right"
+  - if user_signed_in? && current_user.author_of?(question)
+    = link_to "Edit question", '', class: "edit-question-link btn btn-sm btn-gray quad",
+    data: { question_id: @question.id }
+    = link_to "Delete question", question, method: :delete, data: { confirm: "Are you shure?"},
+    class: "btn btn-sm btn-gray quad"

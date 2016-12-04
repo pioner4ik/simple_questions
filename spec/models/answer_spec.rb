@@ -29,22 +29,5 @@ RSpec.describe Answer, type: :model do
       expect(answer_1.best).to eq true
       expect(answer_2.best).to eq false
     end
-
-=begin Подумал что этот тест тут в принципе не нужен,потому что тест выше 
-      тестит связь в обе стороны.Оставил на всякий случай
-    it "mark best second answer" do
-      answer_1.update(best: true)
-      answer_2.update(best: false)
-
-      answer_2.mark_answer_best
-      
-      answer_1.reload
-      answer_2.reload
-
-
-      expect(answer_1.best).to eq false
-      expect(answer_2.best).to eq true
-    end
-=end    
   end
 end
