@@ -53,8 +53,8 @@ class QuestionsController < ApplicationController
   end
 
   def vote
-    Vote.create(present: params[:present], user: current_user, vote_type: @question)
-    
+    Vote.create(present: params[:present], user: current_user, votable: @question)
+
     respond_to do |format|
       format.json { render json: @question.total_votes }
     end
