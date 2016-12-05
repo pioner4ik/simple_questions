@@ -1,8 +1,8 @@
 .votes-table
   %ul
-    %li= link_to "", vote_question_path(@question, present: true), method: :post,
+    %li= link_to "", vote_question_path( object, present: true), method: :post,
     remote: true, html: { type: :json }, class: "fa fa-caret-up fa-3x"
     %li.vote-total
       %h1= @question.total_votes
-    %li= link_to "", vote_question_path(@question, present: false), method: :post,
+    %li= link_to "", vote_question_path( object, present: false), method: :post,
     remote: true, html: { type: :json }, class: "fa fa-caret-down fa-3x"
