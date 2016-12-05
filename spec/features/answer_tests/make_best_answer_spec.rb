@@ -13,7 +13,7 @@ feature "Click on 'make best' button make answer best" do
 
     within "#answer-#{answer.id}" do
       expect(page).to have_content answer.body
-      expect(page).to have_content "Best answer"
+      expect(page).to have_selector '.fa-check'
       expect(page).to have_no_link "make best"
     end    
   end
@@ -25,7 +25,7 @@ feature "Click on 'make best' button make answer best" do
       log_in other_user
       visit question_path(question)
 
-      expect(page).to have_content "Best answer"
+      expect(page).to have_selector '.fa-check'
       expect(page).to have_no_link "make best"
     end
   end

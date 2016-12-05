@@ -3,10 +3,9 @@ Rails.application.routes.draw do
   root to: "questions#index"
   
   resources :questions do
+    member { post 'vote'}
     resources :answers, shallow: true do
-      member do
-        patch :answer_best
-      end
+      member { patch 'answer_best' }
     end
   end
 

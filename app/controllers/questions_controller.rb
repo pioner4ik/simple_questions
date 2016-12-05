@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [ :new, :create ]
-  before_action :set_question, only: [:show, :update, :destroy]
+  before_action :set_question, only: [:show, :update, :destroy, :vote]
 
   def index
     @questions = Question.all
@@ -49,6 +49,14 @@ class QuestionsController < ApplicationController
     else
       flash[:danger] = "Question is not deleted! Please sign in as author!"
       redirect_to @question
+    end
+  end
+
+  def vote
+    Vote.create(present: params[:present], user: current_user, vote_type: @question)
+    
+    respond_to do |format|
+      format.json { render json: @question.total_votes }
     end
   end
 
