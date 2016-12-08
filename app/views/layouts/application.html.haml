@@ -15,7 +15,7 @@
 
           .nav.navbar-nav.float-xs-right
             .nav-item
-              %i.fa.fa-user-o &nbsp;&nbsp; User name
+              %i.fa.fa-user-o= " " + current_user.email
             .nav-item.nav-link
               = link_to "Log out", destroy_user_session_path(@user),
               method: :delete, class: "btn btn-sm btn-gray"

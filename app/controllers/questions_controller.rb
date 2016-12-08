@@ -1,6 +1,8 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, only: [ :new, :create ]
-  before_action :set_question, only: [:show, :update, :destroy, :vote]
+  before_action :authenticate_user!, only: [ :new, :create, :update, :destroy, :vote, :re_vote ]
+  before_action :set_question, only: [:show, :update, :destroy]
+
+  include Voted
 
   def index
     @questions = Question.all
@@ -52,14 +54,6 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def vote
-    Vote.create(present: params[:present], user: current_user, votable: @question)
-
-    respond_to do |format|
-      format.json { render json: @question.total_votes }
-    end
-  end
-
   private
 
     def set_question
@@ -67,6 +61,6 @@ class QuestionsController < ApplicationController
     end
 
     def question_params
-      params.require(:question).permit(:title, :body, attachments_attributes: [ :file, :_destroy ])
+      params.require(:question).permit(:title, :body, attachments_attributes: [ :id, :file, :_destroy ])
     end
 end

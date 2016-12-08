@@ -1,28 +1,32 @@
 .question{ id: "question-#{question.id}"}  
-  .card.card-block
-    .card-title
-      %h3= question.title
-      %hr
-    .card-text
-      %p= question.body
-      .attach_list
-        %ul
-          - @question.attachments.each do |a|
-            %li{id: "attachment-#{a.id}"}
-              .fa.fa-file-o
-              = link_to a.file.identifier, a.file.url, style: "h1"
-              - if user_signed_in? && a.persisted? && current_user.author_of?(a.attachable)
-                = link_to "del", a, method: :delete, remote: true, class: "btn red"
+  .col-xs-2
+    = render partial: 'partials/votes_table', locals: { object: @question }
+  .col-xs-10
+    .card.card-block
+      .card-title
+        %h3= question.title
+        %hr
+      .card-text
+        %p= question.body
+        .attach_list
+          %ul
+            - @question.attachments.each do |a|
+              %li{id: "attachment-#{a.id}"}
+                .fa.fa-file-o
+                = link_to a.file.identifier, a.file.url, style: "h1"
                 
-        - if user_signed_in? && current_user.author_of?(question)
-          = simple_form_for question, remote: true,
-          html: { class: "edit-question", id: "edit-question-#{@question.id}"} do |f|
-            = f.input :title
-            = f.input :body
-            = f.submit "Save", class:"btn btn-sm btn-outline-success float-xs-left"
-
-  - if user_signed_in? && current_user.author_of?(question)
-    = link_to "Edit question", '', class: "edit-question-link btn btn-sm btn-gray quad",
-    data: { question_id: @question.id }
-    = link_to "Delete question", question, method: :delete, data: { confirm: "Are you shure?"},
-    class: "btn btn-sm btn-gray quad"
+                - if user_signed_in? && a.persisted? && current_user.author_of?(a.attachable)
+                  = link_to "del", a, method: :delete, remote: true, class: "btn red"
+    
+          - if user_signed_in? && current_user.author_of?(question)
+            = simple_form_for question, remote: true,
+            html: { class: "edit-question", id: "edit-question-#{@question.id}"} do |f|
+              = f.input :title
+              = f.input :body
+              = f.submit "Save", class:"btn btn-sm btn-outline-success float-xs-left"
+        .float-xs-right.text-muted= question.user.email 
+    - if user_signed_in? && current_user.author_of?(question)
+      = link_to "Edit question", '', class: "edit-question-link btn btn-sm btn-gray quad",
+      data: { question_id: @question.id }
+      = link_to "Delete question", question, method: :delete, data: { confirm: "Are you shure?"},
+      class: "btn btn-sm btn-gray quad"

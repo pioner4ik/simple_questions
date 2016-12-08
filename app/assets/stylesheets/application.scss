@@ -47,8 +47,8 @@ ul{
 }}}    
       
 
-.edit-answer { display: none; }
-.edit-question { display: none; }
+.edit-answer    { display: none; }
+.edit-question  { display: none; }
 
 .navbar{
   background-color: $observ;
@@ -118,6 +118,9 @@ ul{
   padding-top:20px;
   &:hover{
     color: $lightGray;
-  }
+}}
+
+#best-marker{
+  margin-left:  85px;
 }
 

@@ -2,6 +2,8 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_answer, except: [:create]
 
+  include Voted
+
   def create
     @question = Question.find(params[:question_id])
     @answer = @question.answers.build(answer_params)
@@ -30,7 +32,7 @@ class AnswersController < ApplicationController
 
   def answer_best
     @question = @answer.question
-    @answer.mark_answer_best if current_user.author_of?(@question)
+    @answer.mark_answer_best if current_user.author_of?(@answer.question)
   end
 
   private

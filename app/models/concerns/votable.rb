@@ -6,6 +6,6 @@ module Votable
   end
 
   def total_votes
-    self.votes.where( present: true).size - self.votes.where( present: false).size
+    self.votes.sum(:value)
   end
 end
