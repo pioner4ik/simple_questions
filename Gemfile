@@ -32,6 +32,7 @@ group :test do
   gem 'capybara'
   gem 'poltergeist'
   gem 'database_cleaner'
+  gem 'fuubar'
 end
 
 source 'https://rails-assets.org' do
