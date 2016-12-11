@@ -8,4 +8,5 @@ feature "votable question" do
   it_behaves_like "votable author", "question"
   it_behaves_like "votable others", "question"
   it_behaves_like "votable unregisted", "question"
+  #it_behaves_like "re vote", "question"
 end

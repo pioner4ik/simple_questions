@@ -1,5 +1,9 @@
 require "features_helper"
-
+#Rspec просит добавить в rails_helper строчку
+#Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+#при ее добавлении происходит конфликт при прогоне всех тестов
+#если прогнать тесты по отдельным папками controllers feautures models
+#то все проходит
 RSpec.shared_examples "votable author" do |model_name|
 
   before do
@@ -113,3 +117,53 @@ RSpec.shared_examples "votable unregisted" do |model_name|
     end
   end
 end
+
+RSpec.shared_examples "re vote" do |model_name|
+  describe "Other users can vote #{model_name}", :js do
+
+    background do
+      log_in other_user
+      visit question_path question
+      within ".#{model_name} .votes-table" do find(".fa-caret-up").click end
+    end
+
+    describe "click re vote" do
+      
+      it "should delete last vote" do
+        within ".#{model_name} .votes-table" do
+          find(".re-vote").click
+          expect(page).to have_content "0" # этот не прошел
+        end
+      end
+    end
+
+    describe "non-authors of vote can't see 're vote' link" do
+      
+      describe "as Non-authorized user" do
+        before do
+          click_on "Log out"
+          visit question_path question
+        end
+
+        it "'re vote' link not present" do
+          expect(page).to have_no_link "re vote"
+        end
+      end
+
+      describe "as non-author user" do
+        before do
+          click_on "Log out"
+          log_in user
+          visit question_path question
+        end
+
+        it "'re vote' link not present" do
+          expect(page).to have_no_link "re vote"
+        end
+      end
+    end
+  end
+end
+
+
+

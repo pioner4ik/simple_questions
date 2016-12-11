@@ -14,8 +14,8 @@ feature "Add some files to answer", %q{
     log_in user
     visit question_path(question)
   end
-=begin
-  scenario "User adds files to answer", js: true do
+
+  scenario "User adds files to answer", :pending, js: true do
     fill_in "Your answer", with: "My Answer"
     #click_on "add"
     inputs = all('input[type="file"]')
@@ -26,7 +26,7 @@ feature "Add some files to answer", %q{
     expect(page).to have_link "rails_helper.rb"#, href: "/uploads/attachment/file/2/rails_helper.rb"
     #expect(page).to have_link "spec_helper.rb"#, href: "/uploads/attachment/file/3/spec_helper.rb"
   end
-=end
+
   scenario "remove files from answer",js: true do
     within ".answers" do
       click_on "del"

@@ -13,8 +13,8 @@ feature "Add files to question", %q{
     log_in user
     visit new_question_path
   end
-=begin
-  scenario "User adds files to question", js: true do
+
+  scenario "User adds files to question",:pending, js: true do
     fill_in "Title", with: "Test question"
     fill_in "Body", with: "Anybody"
     click_on "add"
@@ -27,7 +27,7 @@ feature "Add files to question", %q{
     expect(page).to have_link "rails_helper.rb"#, href: "/uploads/attachment/file/2/rails_helper.rb"
     expect(page).to have_link "spec_helper.rb"#, href: "/uploads/attachment/file/3/spec_helper.rb"
   end
-=end
+
   scenario "remove files from question",js: true do
     visit question_path(question)
     click_on "del"

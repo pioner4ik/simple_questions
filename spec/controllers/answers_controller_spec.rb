@@ -3,6 +3,15 @@ require 'rails_helper'
 RSpec.describe AnswersController, type: :controller do
   sign_in_user
 
+  describe "only vote" do
+    let(:question) { create(:question, user: @user ) }
+    let(:answer) { create(:answer, user: @user, question: question) }
+
+    it_behaves_like "votable" do
+      let(:model_name) { answer }
+    end
+  end
+
   describe "POST #create" do
     let(:question) { create(:question, user_id: @user.id ) }
 
