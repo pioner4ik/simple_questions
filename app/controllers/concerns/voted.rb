@@ -3,7 +3,6 @@ module Voted
 
   included do
     before_action :set_votable, only: [ :vote, :re_vote ]
-    #before_action :authenticate_user!, only: [ :vote, :re_vote ]
   end
 
   def vote
@@ -14,13 +13,13 @@ module Voted
         if @vote.save
           format.json { render json: { vote: @vote, rating: @votable.total_votes } }
         else
-          format.json { render json: "You already voted! Push button 're vote' to change vote", status: :unprocessable_entity  }
+          format.json { render html: "You already voted! Push button 're vote' to change vote", status: :unprocessable_entity  }
         end
       end
 
     else
       respond_to do |format|
-        format.json { render text: "You can't vote youself object", status: :unprocessable_entity  }
+        format.json { render html: "You can't vote youself object", status: :unprocessable_entity  }
       end
     end
   end

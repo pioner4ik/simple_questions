@@ -1,12 +1,11 @@
 require "features_helper"
-=begin
-feature "" do
+
+feature "votable question" do
   let(:user)        { create(:user) }
   let(:other_user)  { create(:user) }
   let(:question)    { create(:question, user: user) }
 
-  let(:model_name)  { question }
-
-  it_behaves_like "votable"
-=end
-
+  it_behaves_like "votable author", "question"
+  it_behaves_like "votable others", "question"
+  it_behaves_like "votable unregisted", "question"
+end
