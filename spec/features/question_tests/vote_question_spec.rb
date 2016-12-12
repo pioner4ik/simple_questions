@@ -1,6 +1,6 @@
 require "features_helper"
 
-feature "votable question" do
+feature "votable answer" do
   let(:user)        { create(:user) }
   let(:other_user)  { create(:user) }
   let(:question)    { create(:question, user: user) }
