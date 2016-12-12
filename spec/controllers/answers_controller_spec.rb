@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe AnswersController, type: :controller do
   sign_in_user
 
-  describe "only vote" do
+  describe "only vote", :pending do
     let(:question) { create(:question, user: @user ) }
     let(:answer) { create(:answer, user: @user, question: question) }
 

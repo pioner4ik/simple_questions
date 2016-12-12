@@ -5,8 +5,10 @@ RSpec.describe QuestionsController, type: :controller do
 
   let(:question) { create(:question, user_id: @user.id) }
 
-  it_behaves_like "votable" do
-    let(:model_name) { question }
+  describe "vote#POST", :pending do
+    it_behaves_like "votable" do
+      let(:model_name) { question }
+    end
   end
 
   describe 'GET #index' do
