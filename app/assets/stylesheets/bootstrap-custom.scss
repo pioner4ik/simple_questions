@@ -1,0 +1,46 @@
+$lightGray:  #DFDFDF;
+$middleGray: #808080;
+$darkGray:   #666E6D;
+
+.btn-white {
+  color: $darkGray;
+  background-color: white;
+  border-color: $darkGray;
+  }
+.btn-white:hover,
+ .btn-secondary:focus,
+ .btn-secondary:active,
+  .btn-secondary.active,
+   .open .dropdown-toggle.btn-secondary
+    { color: white ; background-color: $darkGray; border-color:$darkGray; }
+
+.btn-gray {
+  color: $darkGray;
+  background-color: $lightGray;
+  border-color: $lightGray;
+  }
+.btn-gray:hover,
+ .btn-secondary:focus,
+ .btn-secondary:active,
+  .btn-secondary.active,
+   .open .dropdown-toggle.btn-secondary
+    { color: white ; background-color: $darkGray; border-color: $darkGray; }
+
+.btn-answer {
+  color: $lightGray;
+  background-color: $darkGray;
+  border-color: none;
+  }
+.btn-answer:hover,
+ .btn-secondary:focus,
+ .btn-secondary:active,
+  .btn-secondary.active,
+   .open .dropdown-toggle.btn-secondary
+    { color: white ; background-color: $middleGray; border-color: none; }
+
+.quad {
+    border-radius: 0px !important;
+}
+.muted{
+  color: $middleGray !important;
+}

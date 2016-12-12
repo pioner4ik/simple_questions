@@ -4,7 +4,6 @@ ready = ->
     $(this).hide();
     question_id = $(this).data('questionId')
     $('form#edit-question-' + question_id).show()
-
  
 $(document).ready(ready)
 $(document).on('page:load', ready)

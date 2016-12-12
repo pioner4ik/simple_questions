@@ -1,13 +1,13 @@
 class Answer < ApplicationRecord
+  include Attachable
+  include Votable
+
   default_scope -> { order("best DESC") }
 
   belongs_to :user
   belongs_to :question
-  has_many :attachments, as: :attachable, dependent: :destroy
 
   validates :body, presence: true
-
-  accepts_nested_attributes_for :attachments, reject_if: :all_blank
 
   def mark_answer_best
     transaction do
