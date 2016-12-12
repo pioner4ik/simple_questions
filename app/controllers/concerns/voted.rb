@@ -9,18 +9,13 @@ module Voted
     @vote = Vote.new(value: params[:value], user: current_user, votable: @votable)
 
     if !current_user.author_of?(@votable)
-      respond_to do |format|
-        if @vote.save
-          format.json { render json: { vote: @vote, rating: @votable.total_votes } }
-        else
-          format.json { render html: "You already voted! Push button 're vote' to change vote", status: :unprocessable_entity  }
-        end
+      if @vote.save
+        render json: { vote: @vote, rating: @votable.total_votes }
+      else
+        render text: "You already voted!", status: :unprocessable_entity
       end
-
     else
-      respond_to do |format|
-        format.json { render html: "You can't vote youself object", status: :unprocessable_entity  }
-      end
+      render text: "You can't vote youself object", status: :unprocessable_entity
     end
   end
 
@@ -28,9 +23,7 @@ module Voted
     @vote = @votable.votes.first
     @votable.votes.where(user_id: current_user.id).destroy_all
 
-    respond_to do |format|
-      format.json { render json: { vote: @vote, rating: @votable.total_votes } }
-    end
+    render json: { vote: @vote, rating: @votable.total_votes }
   end
 
   private
