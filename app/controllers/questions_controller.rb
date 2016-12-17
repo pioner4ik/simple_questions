@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [ :new, :create, :update, :destroy, :vote, :re_vote ]
   before_action :set_question, only: [:show, :update, :destroy]
+  after_action :publish_question, only: :create
 
   include Voted
 
@@ -62,5 +63,10 @@ class QuestionsController < ApplicationController
 
     def question_params
       params.require(:question).permit(:title, :body, attachments_attributes: [ :id, :file, :_destroy ])
+    end
+
+    def publish_question
+      return if @question.errors.any?
+      ActionCable.server.broadcast('questions', @question.to_json)
     end
 end
