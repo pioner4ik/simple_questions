@@ -1,0 +1,18 @@
+.row
+  div class = 'answer' id = "answer-#{@answer.id}"
+    .col-xs-2
+      .votes-table
+        ul
+          li
+            a.fa.fa-caret-up.fa-3x href="answers/#{@answer.id}/vote_up?value1" data-method="patch" data-remote="true" data-type="json"
+
+          li class = 'vote-total'
+            h1= 0
+
+          li
+            a.fa.fa-caret-down.fa-3x href="answers/#{@answer.id}/vote_up?value-1" data-method="patch" data-remote="true" data-type="json"            
+
+    .col-xs-10
+      .card.card-block
+        .card-text     
+          p= @answer.body
