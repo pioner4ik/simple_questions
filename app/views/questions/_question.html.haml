@@ -24,9 +24,12 @@
               = f.input :title
               = f.input :body
               = f.submit "Save", class:"btn btn-sm btn-outline-success float-xs-left"
-        .float-xs-right.text-muted= question.user.email 
+        .float-xs-right.text-muted= question.user.email
+    - if user_signed_in?
+      = link_to "Add comment",'#', class: "btn btn-sm btn-gray quad"
     - if user_signed_in? && current_user.author_of?(question)
       = link_to "Edit question", '', class: "edit-question-link btn btn-sm btn-gray quad",
       data: { question_id: @question.id }
       = link_to "Delete question", question, method: :delete, data: { confirm: "Are you shure?"},
       class: "btn btn-sm btn-gray quad"
+  .comments.float-xs-right    

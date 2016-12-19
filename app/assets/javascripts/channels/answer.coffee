@@ -1,8 +1,9 @@
-App.answer = App.cable.subscriptions.create "AnswerChannel",
+App.answer = App.cable.subscriptions.create channel: "AnswerChannel", 
   connected: ->
-    @perform 'follow'
+    @perform 'follow', id: gon.question_id
 
   disconnected: ->
 
   received: (data) ->
-    $('.answers').append(JST["templates/answer"]({ answer: ($.parseJSON(data)) }))
+    ###alert data###
+    $('.answers').append(JST["templates/answer"]($.parseJSON(data)))

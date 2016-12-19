@@ -48,6 +48,12 @@ class AnswersController < ApplicationController
 
     def publish_answer
       return if @answer.errors.any?
-      ActionCable.server.broadcast('answers', @answer.to_json)
+      
+      ActionCable.server.broadcast("question-#{@answer.question.id}-answers", 
+        { answer: @answer,
+          attachments: @answer.attachments,
+          author: @answer.user,
+          rating: @answer.total_votes }.to_json
+      )
     end
 end
