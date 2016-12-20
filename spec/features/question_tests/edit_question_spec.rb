@@ -33,7 +33,6 @@ feature "Edit question", %q{
         expect(page).to have_content "OtherText"
         expect(page).to have_no_content question.title
         expect(page).to have_no_content question.body
-        expect(page).to have_no_selector "textarea"
       end
     end
   end

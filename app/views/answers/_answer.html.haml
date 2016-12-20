@@ -33,6 +33,9 @@
           = link_to "Delete", answer, method: :delete, remote: true, class:"btn btn-sm btn-gray quad"
         
           = link_to "Edit", '', class: 'edit-answer-link btn btn-sm btn-gray quad', data: { answer_id: answer.id }
+  .row
+    .offset-xs-2.col-xs-8
+      = render partial: "partials/comment_form", locals: { commentable: answer }
   %hr    
 
 
