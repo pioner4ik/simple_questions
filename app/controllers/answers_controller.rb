@@ -1,34 +1,24 @@
-class AnswersController < ApplicationController
+ class AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_answer, except: [:create]
+  before_action :set_answer, except: :create
   after_action  :publish_answer, only: :create
+
+  respond_to :js
 
   include Voted
 
   def create
     @question = Question.find(params[:question_id])
-    @answer = @question.answers.build(answer_params)
-    @answer.user = current_user
-
-    if @answer.save
-      flash.now[:success] = "Congratulations! Answer created!"
-    else
-      flash.now[:danger] = "Answer is not created! Try later!"
-    end
+    respond_with(@answer = @question.answers.create(answer_params.merge(user: current_user)))
   end
 
   def update
     @answer.update(answer_params) if current_user.author_of?(@answer)
+    respond_with @answer
   end
 
   def destroy
-    if current_user.author_of?(@answer)
-      flash[:warning] = "Answer deleted!"
-      @answer.destroy
-    else
-      flash[:danger] = "Answer is not deleted! Please sign in as author!"
-    end
-      redirect_to question_path(@answer.question)
+    respond_with(@answer.destroy) if current_user.author_of?(@answer) 
   end
 
   def answer_best

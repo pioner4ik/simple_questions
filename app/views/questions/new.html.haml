@@ -5,7 +5,7 @@
     = f.input :body
     %p Attachment
     .short_attachments
-      = f.simple_fields_for :attachments do |a|
+      = f.simple_fields_for :attachments, @question.attachments.build do |a|
         = render 'partials/attachment_fields', f: a
       .links
         = link_to_add_association 'add', f, :attachments, partial: "partials/attachment_fields"
