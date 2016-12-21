@@ -1,0 +1,4 @@
+- if (@comment.user_id != gon.user_id)
+  .comment
+    .blockquote
+      p= @comment.content

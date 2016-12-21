@@ -1,0 +1,11 @@
+<% if @commentable.errors.present? %>
+  <% @commentable.errors.full_messages.each do |message| %>
+    $('.error-messages').html('<%= j message %>');
+  <% end %>
+<% else %>
+  commentTable = $('.comments[commentable_id="<%= @commentable.id %>"][commentable_type="<%= @commentable.class %>"]')
+  commentTable.prepend('<%= j render @comment %>');
+  commentTable.find('#comment_content').val('');
+<% end %>
+
+

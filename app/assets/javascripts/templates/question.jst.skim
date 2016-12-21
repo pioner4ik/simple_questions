@@ -1,0 +1,6 @@
+div class = 'question-block'
+  ul
+    li
+      h1
+        a href="questions/#{@id}" #{@title}
+    hr    

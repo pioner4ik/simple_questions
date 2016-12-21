@@ -45,7 +45,17 @@ ul{
       text-decoration: none;
       margin: 5px;
 }}}    
-      
+
+.comment{
+  width: 100%;
+  min-height: 40px;
+  border-radius: 3px;
+  background-color: white;
+  border-left: 3px solid $elf;
+}
+.comments{
+  margin-top: 20px; 
+}
 
 .edit-answer    { display: none; }
 .edit-question  { display: none; }
@@ -80,7 +90,7 @@ ul{
     min-height: 240px;
 }}
 
-.questions{
+.question-block{
   padding-left: 50px;
   ul li a{
           font-weight: bold;

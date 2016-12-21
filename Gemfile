@@ -19,12 +19,15 @@ gem 'devise'
 gem 'cocoon'
 gem 'remotipart'
 gem "font-awesome-rails"
+gem 'skim'
+gem 'gon'
 
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'listen'
   gem 'launchy'
+  gem 'sprockets', '3.6.3'
 end
 
 group :test do

@@ -1,0 +1,28 @@
+- if (@answer.user_id != gon.user_id)
+  .row
+    div class = 'answer' id = "answer-#{@answer.id}"
+      .col-xs-2
+        .votes-table
+          ul
+            li
+              a.fa.fa-caret-up.fa-3x href="/answers/#{@answer.id}/vote?value=1" data-method="post" data-remote="true" data-type="json" rel = "nofollow"
+
+            li class = 'vote-total'
+              h1= @rating
+
+            li
+              a.fa.fa-caret-down.fa-3x href="/answers/#{@answer.id}/vote?value=-1" data-method="post" data-remote="true" data-type="json" rel = "nofollow"
+
+      .col-xs-10
+        .card.card-block
+          .card-text
+            p= @answer.body
+            .attach_list
+              ul
+                - for attachment in @attachments
+                  li class="attachment-#{attachment.id}"
+                    .fa.fa-file-o
+                    a href="#{attachment.file.url}" = attachment.file.url.substring(attachment.file.url.lastIndexOf('/')+1)
+            .float-xs-right.text-muted= @author.email
+  hr     
+
