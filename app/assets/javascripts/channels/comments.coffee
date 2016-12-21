@@ -3,6 +3,7 @@ App.comments = App.cable.subscriptions.create "CommentsChannel",
     @perform 'follow', id: gon.question_id
 
   disconnected: ->
+    @perform 'unfollow'
     
   received: (data) ->
     comment = $.parseJSON(data)

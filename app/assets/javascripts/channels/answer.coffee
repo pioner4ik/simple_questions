@@ -3,6 +3,7 @@ App.answer = App.cable.subscriptions.create channel: "AnswerChannel",
     @perform 'follow', id: gon.question_id
 
   disconnected: ->
+    @perform 'unfollow'
 
   received: (data) ->
     ###alert data###
