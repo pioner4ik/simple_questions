@@ -8,6 +8,10 @@ Bundler.require(*Rails.groups)
 
 module SimpleQuestions
   class Application < Rails::Application
+    # Use the responders controller from the responders gem
+    config.app_generators.scaffold_controller :responders_controller
+
+    config.responders.flash_keys = [ :success, :warning, :danger ]
 
     config.action_cable.disable_request_forgery_protection = false
     

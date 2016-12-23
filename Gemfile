@@ -21,6 +21,7 @@ gem 'remotipart'
 gem "font-awesome-rails"
 gem 'skim'
 gem 'gon'
+gem 'responders'
 
 group :development, :test do
   gem 'rspec-rails'
