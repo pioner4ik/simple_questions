@@ -22,6 +22,8 @@ gem "font-awesome-rails"
 gem 'skim'
 gem 'gon'
 gem 'responders'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 group :development, :test do
   gem 'rspec-rails'
