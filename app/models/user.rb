@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: [:facebook]
+         :omniauthable, omniauth_providers: [:facebook, :vkontakte]
          
   has_many :questions,      dependent: :destroy
   has_many :answers,        dependent: :destroy
@@ -24,12 +24,17 @@ class User < ApplicationRecord
 
     if user
       user.authorizations.create(provider: auth.provider, uid: auth.uid)
-    else
+    elsif email.present?
       password = Devise.friendly_token[0, 20]
       user= User.create!(email: email, password: password, password_confirmation: password)
       user.authorizations.create(provider: auth.provider, uid: auth.uid)
+    else
+      User.any? ? last_user = User.all.last.id + 1 : last_user = 1
+      password = Devise.friendly_token[0, 20]
+      user= User.create!(email: "user#{last_user}@test.com" , password: password, password_confirmation: password)
+      user.authorizations.create(provider: auth.provider, uid: auth.uid)
     end
-
+    
     user
   end
 end

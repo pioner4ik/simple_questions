@@ -24,6 +24,7 @@ gem 'gon'
 gem 'responders'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'omniauth-vkontakte'
 
 group :development, :test do
   gem 'rspec-rails'
