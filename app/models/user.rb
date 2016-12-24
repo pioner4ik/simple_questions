@@ -30,6 +30,7 @@ class User < ApplicationRecord
       user.authorizations.create(provider: auth.provider, uid: auth.uid)
     else
       User.any? ? last_user = User.all.last.id + 1 : last_user = 1
+      #тут нельзя потому что пользователь может быть удален и count будет менше чем last.id
       password = Devise.friendly_token[0, 20]
       user= User.create!(email: "user#{last_user}@test.com" , password: password, password_confirmation: password)
       user.authorizations.create(provider: auth.provider, uid: auth.uid)
