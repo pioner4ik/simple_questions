@@ -25,6 +25,7 @@ gem 'responders'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
+gem "letter_opener", :group => :development
 
 group :development, :test do
   gem 'rspec-rails'
