@@ -10,10 +10,14 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   private
 
     def social_network(data)
-      @user = User.find_for_oauth(request.env['omniauth.auth'])
-      if @user.persisted?
+      auth = request.env['omniauth.auth']
+      @user = User.find_for_oauth(auth)
+      if @user
         sign_in_and_redirect @user, event: :authentication
-        set_flash_message(:notice, :success, kind: data) if is_navigational_format?
+        set_flash_message(:notice, :success, kind: data.capitalize) if is_navigational_format?
+      else
+        session["devise.auth_data"] = { provider: auth.provider, uid: auth.uid }
+        redirect_to new_user_path
       end
     end
 end

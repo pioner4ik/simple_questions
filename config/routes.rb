@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
-
   root to: "questions#index"
+
+  devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
+  
+  resources :users, only: [:new] do
+    collection { post 'create_user_with_email' }
+  end
   
   concern :votable do
     member do
