@@ -8,7 +8,7 @@
   .answers
     = render @question.answers
 
-  - if user_signed_in? 
+  - if can? :create, @answer
     .offset-xs-4.col-xs-8
       = simple_form_for [ @question, @answer ], remote: true do |f| 
         = f.input :body, label: "Your answer"

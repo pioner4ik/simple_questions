@@ -5,6 +5,8 @@ class CommentsController < ApplicationController
   
   respond_to :js
 
+  authorize_resource
+  
   def create
     respond_with(@comment = Comment.create(comment_params.merge(user_id: current_user.id, commentable: @commentable)))
   end
