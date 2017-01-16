@@ -1,0 +1,5 @@
+.col-xs-6.offset-xs-4
+  %h3 Please enter your email to finish registration
+  = simple_form_for @user, url: create_user_with_email_users_path do |f|
+    = f.input :email
+    = f.submit "Email vertification"
