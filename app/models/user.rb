@@ -25,10 +25,8 @@ class User < ApplicationRecord
     if user
       user.authorizations.create(provider: auth.provider, uid: auth.uid)
     elsif email.present?
-      password = Devise.friendly_token[0, 20]
-      user= User.create(email: email, password: password, password_confirmation: password)
-      user.authorizations.create(provider: auth.provider, uid: auth.uid)
-    end 
+      user = User.create_from_oauth(email, auth)
+    end
 
     user
   end
