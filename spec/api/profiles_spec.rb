@@ -39,4 +39,45 @@ describe 'Profile API' do
       end
     end
   end
+
+  describe 'GET/index' do
+    context 'unauthorized' do
+      it 'returns 401 status if there is no access_token' do
+        get '/api/v1/profiles/all', format: :json
+        expect(response.status).to eq 401  
+      end
+
+      it 'returns 401 status if access_token is invalid' do
+        get '/api/v1/profiles/all', format: :json, access_token: '1234'
+        expect(response.status).to eq 401  
+      end
+    end
+
+    context 'authorized' do
+      let(:me)            { create :user }
+      let!(:users)        { create_list(:user, 5) }
+      let(:access_token)  { create(:access_token, resource_owner_id: me.id) }
+
+      before { get '/api/v1/profiles/all', format: :json, access_token: access_token.token }
+
+      it 'returns 200 status' do    
+        expect(response).to be_success
+      end
+
+      it "contains users list" do
+        expect(response.body).to have_json_size(users.size)
+      end
+
+      it "does not contains current user" do
+        expect(response.body).to_not include_json(me.to_json)
+      end
+
+      %w(password encrypted_password).each do |attr|
+
+        it "users does not contains #{attr}" do
+          expect(response.body).to_not have_json_path(attr)
+        end
+      end
+    end
+  end
 end
