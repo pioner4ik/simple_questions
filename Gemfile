@@ -27,6 +27,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
 gem "letter_opener", :group => :development
 gem 'cancancan'
+gem 'doorkeeper'
 
 group :development, :test do
   gem 'rspec-rails'
@@ -42,6 +43,7 @@ group :test do
   gem 'poltergeist'
   gem 'database_cleaner'
   gem 'fuubar'
+  gem 'json_spec'
 end
 
 source 'https://rails-assets.org' do
