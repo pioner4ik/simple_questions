@@ -38,7 +38,8 @@
         %li Some Link 3
 
     %h1#ask_button
-      = link_to "Ask question", new_question_path, class: "btn btn-lg btn-answer"
+      - if can? :create, Question
+        = link_to "Ask question", new_question_path, class: "btn btn-lg btn-answer"
 
     %br
     .col-xs-9

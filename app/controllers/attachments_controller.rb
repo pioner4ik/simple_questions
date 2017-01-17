@@ -3,8 +3,9 @@ class AttachmentsController < ApplicationController
 
   respond_to :js
 
+  load_and_authorize_resource
+  
   def destroy
-    @attachment = Attachment.find(params[:id])
-    respond_with(@attachment.destroy) if current_user.author_of?(@attachment.attachable)
+    respond_with(@attachment.destroy)
   end
 end

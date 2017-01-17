@@ -6,6 +6,8 @@
   respond_to :js
 
   include Voted
+  
+  authorize_resource
 
   def create
     @question = Question.find(params[:question_id])
@@ -13,17 +15,17 @@
   end
 
   def update
-    @answer.update(answer_params) if current_user.author_of?(@answer)
+    @answer.update(answer_params)
     respond_with @answer
   end
 
   def destroy
-    respond_with(@answer.destroy) if current_user.author_of?(@answer) 
+    respond_with(@answer.destroy)
   end
 
   def answer_best
     @question = @answer.question
-    @answer.mark_answer_best if current_user.author_of?(@answer.question)
+    @answer.mark_answer_best
   end
 
   private

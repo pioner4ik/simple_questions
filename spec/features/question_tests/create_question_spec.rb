@@ -36,9 +36,8 @@ feature "Create question", %q{
 
   scenario "Non-authenticated user create question" do
     visit questions_path
-    click_on "Ask question"
 
-    expect(page).to have_content "You need to sign in or sign up before continuing."
+    expect(page).to have_no_content "Ask question"
   end
 
   context "mulitple sessions", :js do
