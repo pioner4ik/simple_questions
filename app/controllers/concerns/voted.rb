@@ -9,10 +9,6 @@ module Voted
     authorize! :vote, @votable
 
     @vote = Vote.new(value: params[:value], user: current_user, votable: @votable)
-    # ниже следует еденичный момент где я оставил метод author_of.На уровне абилити я должен задать 
-    # доступ к голосованию для юзеров.Голосование должно быть доступно как для автора вопроса,
-    # так и для остальных юзеров.Если я сделаю абилити только для none-авторов, то при гоосовании
-    # автором у меня произойдет редирект CanCan::AcceessDenied, а не рендер сообщения You can't vote youself object
     if !current_user.author_of?(@votable)
       if @vote.save
         render json: { vote: @vote, rating: @votable.total_votes }
