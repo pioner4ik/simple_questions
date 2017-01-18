@@ -72,6 +72,14 @@ describe 'Profile API' do
         expect(response.body).to_not include_json(me.to_json)
       end
 
+      %w(email id created_at updated_at admin).each do |attr|
+
+        it "does contains #{attr}" do
+          user = users.first
+          expect(response.body).to be_json_eql(user.send(attr.to_sym).to_json).at_path("0/#{attr}")
+        end
+      end
+
       %w(password encrypted_password).each do |attr|
 
         it "users does not contains #{attr}" do

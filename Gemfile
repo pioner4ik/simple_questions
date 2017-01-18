@@ -28,6 +28,9 @@ gem 'omniauth-vkontakte'
 gem "letter_opener", :group => :development
 gem 'cancancan'
 gem 'doorkeeper'
+gem 'active_model_serializers'
+gem 'oj'
+gem 'oj_mimic_json'
 
 group :development, :test do
   gem 'rspec-rails'
