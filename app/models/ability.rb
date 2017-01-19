@@ -27,9 +27,7 @@ class Ability
     can :destroy,     Attachment, attachable: { user_id: user.id }
     can :answer_best, Answer,     question: { user_id: user.id }
     can :vote, [Question, Answer]
-    #Если я сделаю абилити только других юзеров, то при гоосовании
-    # автором у меня произойдет редирект CanCan::AcceessDenied,
-    # а не рендер сообщения You can't vote youself object
     can :re_vote, Vote, votable: { user_id: user.id }
+    can [:read, :me], User
   end
 end
