@@ -1,7 +1,12 @@
-.comments{ commentable_type: commentable.class, commentable_id: commentable.id }
-  = render commentable.comments
+.offset-xs-2.col-xs-6
+  %br
+  -if commentable.comments.any?
+    %h5 Comments
+  .comments{ commentable_type: commentable.class, commentable_id: commentable.id }
+    = render commentable.comments
+
+  %h5 Your may add comment:
   .comment-form
     = simple_form_for [ commentable, commentable.comments.build ], remote: true do |f|
-      = f.input :content, label: false, placeholder: "Add comment here"
-      = f.submit "send comment", class: "btn btn-sm btn-gray quad"
-%br
+      = f.input :content, label: false, placeholder: "Add here"
+      .float-xs-right= f.submit "send comment", class: "btn btn-sm btn-gray quad"

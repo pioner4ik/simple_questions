@@ -12,42 +12,33 @@
     .navbar.navbar-fixed-top.navbar-dark
       .container
         .navbar.navbar-brand
-          %h3= link_to "Simple Questions", root_path, id: "logotip"
+          %h4= link_to "Simple Questions", root_path, id: "logotip"
+          
         - if user_signed_in?
-
           .nav.navbar-nav.float-xs-right
             .nav-item
               %i.fa.fa-user-o= " " + current_user.email
             .nav-item.nav-link
               = link_to "Log out", destroy_user_session_path(@user),
-              method: :delete, class: "btn btn-sm btn-gray"
+              method: :delete, class: "btn btn-gray btn-sm"
         -else      
           .nav.navbar-nav.float-xs-right
-            .nav-item.nav-link.active
+            .nav-item.nav-link
               = link_to "New user?", new_user_registration_path(@user),
-              class: "btn btn-sm btn-white"
-            .nav-item.nav-link.active
+              class: "btn btn-gray btn-sm"
+            .nav-item.nav-link
               = link_to "Sign in", new_user_session_path(@user),
-              class: "btn btn-sm btn-gray" 
+              class: "btn btn-gray btn-sm" 
 
-      
-    .navbar.navbar-fixed-top.footer-navbar
-      %ul
-        %li Some link 1
-        %li Some link 2
-        %li Some Link 3
-
-    %h1#ask_button
+    #ask_button
       - if can? :create, Question
-        = link_to "Ask question", new_question_path, class: "btn btn-lg btn-answer"
-
+        = link_to "Ask question", new_question_path, class: "btn btn-observ"
     %br
-    .col-xs-9
-      .row
-        .messages
-          .flash-messages
-            = render 'partials/flash'
-          .error-messages
-            = render 'partials/errors'
 
+    .col-xs-9
+      .offset-xs-2
+        .row
+          .messages
+            .flash-messages
+              = render 'partials/flash'
       = yield

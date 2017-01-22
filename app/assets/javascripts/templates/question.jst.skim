@@ -1,6 +1,16 @@
-div class = 'question-block'
-  ul
-    li
-      h1
-        a href="questions/#{@id}" #{@title}
-    hr    
+.question-block
+  li
+    ul
+      li
+        .status-block
+          p= @votes_count
+          p votes
+      li    
+        .status-block
+          p= @answers_count
+          p answers
+      li
+        h5
+          a href="questions/#{@question.id}" #{@question_title}
+      hr
+

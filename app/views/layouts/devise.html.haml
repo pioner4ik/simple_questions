@@ -1,0 +1,17 @@
+!!!
+%html
+  %head
+    %title SimpleQuestions
+    = Gon::Base.render_data
+    = csrf_meta_tags
+    = action_cable_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  %body{style: "background-color: #455a64;"}
+    .container
+      .col-xs-7
+        #logo-registration
+          %h1.display-3 Simple Questions
+      .col-xs-5
+        = yield

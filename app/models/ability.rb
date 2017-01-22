@@ -27,7 +27,7 @@ class Ability
     can :destroy,     Attachment, attachable: { user_id: user.id }
     can :answer_best, Answer,     question: { user_id: user.id }
     can :vote, [Question, Answer]
-    can :re_vote, Vote, votable: { user_id: user.id }
+    can :re_vote, Vote, { user_id: user.id }
     can [:read, :me], User
   end
 end

@@ -1,7 +1,21 @@
-#questions
-  .question-block
-    %ul
+#questions-main
+  %h3{style: "font-weight: bold;"} Top questions
+  %hr
+  %ul  
+    #questions
       - @questions.each do |q|
-        %li
-          %h1= link_to q.title, question_path(q)
-          %hr
+        .question-block
+          %li
+            %ul
+              %li
+                .status-block
+                  %p= q.votes.count 
+                  %p votes
+              %li    
+                .status-block
+                  %p= q.answers.count 
+                  %p answers
+              %li
+                %h5= link_to q.title.capitalize, question_path(q)
+              %hr
+

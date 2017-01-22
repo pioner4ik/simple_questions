@@ -1,30 +1,24 @@
 /*
  *= require bootstrap-custom
+ *= require login-form
  */
 
 @import "bootstrap";
 @import "font-awesome";
 
-$lightGray:  #DFDFDF;
-$middleGray: #808080;
-$darkGray:   #666E6D;
-$montana:    #373A3C;
-$elf:        #1A8C67;
+$lightGray:  #eceff1;
+$darkGray:   #455a64;
+$montana:    #263238;
 $observ:     #1D9E74;
+$muted:      #828282;
 
 body{
-  margin-top: 100px;
+  margin-top: 50px;
   background-color: $lightGray;
   margin-left: 50px;
 }
 
-h2{
-  text-align: center;
-}
-
-ul{
-  list-style-type: none;
-}
+ul{ list-style-type: none; }
 
 /* classes---------------------------------*/
 .answer{
@@ -48,38 +42,38 @@ ul{
 
 .comment{
   width: 100%;
-  min-height: 40px;
+  min-height: 30px;
   border-radius: 3px;
+  padding: 10px;
   background-color: white;
-  border-left: 3px solid $elf;
+  box-shadow: 0 0 1px $muted;
 }
-.comments{
-  margin-top: 20px; 
-}
+
+.comment-form{
+  form{
+    border-radius: 3px;
+    box-shadow: inset 0 0 3px $montana;
+}}
+
+.comments{ margin-top: 20px; }
 
 .edit-answer    { display: none; }
 .edit-question  { display: none; }
 
+.flash-messages{
+  position: fixed;
+  left: 219px;
+  width: 811px;
+  height: 50px;
+  z-index: 1;
+}
+
 .navbar{
-  background-color: $observ;
+  background-color: $darkGray;
   i{
     padding-top: 15px; 
     color: white;
 }}
-
-.footer-navbar{
-  margin-top: 55px;
-  height: 30px;
-  background-color: $elf;
-  ul {
-    float: right;
-    margin-right: 30px;
-    li {
-      color: white;
-      display: inline; 
-      margin-right: 10px;
-      padding: 2px;
-}}}
 
 .observ{
   color: $observ !important;
@@ -90,13 +84,26 @@ ul{
     min-height: 240px;
 }}
 
+.question-header{
+  letter-spacing: 1.7px;
+  h4 { color: #0275D8; }
+}
+
 .question-block{
   padding-left: 50px;
-  ul li a{
-          font-weight: bold;
-          color: $montana;
-          text-decoration: none;
+  li{
+    ul li{ display: inline-block; margin: 10px 60px 0 0; }
+    a{ text-decoration: none; }
 }}
+
+.single-question-block{ margin-top: 30px; }
+
+.status-block{
+  line-height: 2px;
+  text-align: center;
+  font-size: 14px;
+  color: $muted;
+}
 
 .red{
   color: #F7AFA4 !important;
@@ -118,6 +125,7 @@ ul{
 
 #ask_button{
   float: right;
+  margin-top: 30px;
   margin-right: 50px;
 }
 
@@ -125,12 +133,22 @@ ul{
   text-decoration: none;
   color: white;
   font-weight: bold;
-  padding-top:20px;
+  padding-top:15px;
   &:hover{
     color: $lightGray;
 }}
 
+#logo-registration{
+  color: white;
+  font-weight: bold;
+  margin-top: 400px;
+}
+
 #best-marker{
   margin-left:  85px;
+}
+
+#questions-main{
+  margin-top: 70px;
 }
 

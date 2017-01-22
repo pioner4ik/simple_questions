@@ -1,5 +1,12 @@
-.col-xs-6.offset-xs-4
-  %h3 Please enter your email to finish registration
+.login-form
+  %br
+  %br
+  %h4 Please enter your email to finish registration
+  %br
   = simple_form_for @user, url: create_user_with_email_users_path do |f|
-    = f.input :email
-    = f.submit "Email vertification"
+    .form-input
+      = f.input :email, placeholder: "Write your email here", label: false
+    .login-button
+      = f.submit "Email vertification"
+  %br    
+  %p= link_to "Back to registration", new_user_registration_path

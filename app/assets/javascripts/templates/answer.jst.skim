@@ -15,14 +15,17 @@
 
       .col-xs-10
         .card.card-block
-          .card-text
-            p= @answer.body
+          .cart-title
+            .text-muted= "By user: #{@author.email}"
+            hr
+          .card-text   
+            p= @answer.body.capitalize
             .attach_list
               ul
                 - for attachment in @attachments
                   li class="attachment-#{attachment.id}"
                     .fa.fa-file-o
                     a href="#{attachment.file.url}" = attachment.file.url.substring(attachment.file.url.lastIndexOf('/')+1)
-            .float-xs-right.text-muted= @author.email
-  hr     
+  .offset-xs-2
+    hr     
 

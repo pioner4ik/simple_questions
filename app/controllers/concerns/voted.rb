@@ -13,10 +13,10 @@ module Voted
       if @vote.save
         render json: { vote: @vote, rating: @votable.total_votes }
       else
-        render text: "You already voted!", status: :unprocessable_entity
+        render json: { message: "You already voted!"}, status: :unprocessable_entity
       end
     else
-      render text: "You can't vote youself object", status: :unprocessable_entity
+      render json: { message: "You can't vote youself object"}, status: :unprocessable_entity
     end
   end
 
