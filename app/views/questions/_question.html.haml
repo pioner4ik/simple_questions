@@ -36,6 +36,6 @@
         = link_to "Delete question", question, method: :delete, data: { confirm: "Are you shure?"},
         class: "btn btn-sm btn-light quad"
 
-    .comments-block     
-      = render partial: "partials/comment_form", locals: { commentable: @question }
+      .comments-block     
+        = render partial: "partials/comment_form", locals: { commentable: @question }
 

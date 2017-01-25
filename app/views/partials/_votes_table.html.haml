@@ -1,14 +1,17 @@
 .votes-table
   %ul    
-    %li= link_to "", polymorphic_path( [:vote, object ], value: 1), method: :post,
+    %li= link_to "", polymorphic_path([:vote_up, object ]), method: :post,
     remote: true, html: { type: :json }, class: "fa fa-caret-up fa-3x"
 
     %li.vote-total
       %h1= object.total_votes
 
-    %li= link_to "", polymorphic_path( [:vote, object ], value: -1), method: :post,
+    %li= link_to "", polymorphic_path( [:vote_down, object ]), method: :post,
     remote: true, html: { type: :json }, class: "fa fa-caret-down fa-3x"
 
     -if object.votes.where(user_id: current_user).any?
       %li.re-vote= link_to "re vote", polymorphic_path( [:re_vote, object]), method: :delete,
+      remote: true, html: { type: :json }, class: "observ"
+    -else
+      %li.re-vote{style: "display:none;"}= link_to "re vote", polymorphic_path( [:re_vote, object]), method: :delete,
       remote: true, html: { type: :json }, class: "observ"

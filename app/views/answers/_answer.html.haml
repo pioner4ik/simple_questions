@@ -34,7 +34,7 @@
         - if can? :destroy, answer
           = link_to "Delete", answer, method: :delete, remote: true, class:"btn btn-sm btn-light quad"        
 
-      = render partial: "partials/comment_form", locals: { commentable: answer }
+        = render partial: "partials/comment_form", locals: { commentable: answer }
   .offset-xs-2    
     %hr
 
