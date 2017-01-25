@@ -25,12 +25,12 @@ feature "Edit question", %q{
       click_on "Edit"
 
       within '.question' do
-        fill_in "Title", with: "OtherTitle"
-        fill_in "Body", with: "OtherText"
+        fill_in "Title", with: "Other title"
+        fill_in "Body", with: "Other text"
         click_on "Save"
 
-        expect(page).to have_content "OtherTitle"
-        expect(page).to have_content "OtherText"
+        expect(page).to have_content "Other title"
+        expect(page).to have_content "Other text"
         expect(page).to have_no_content question.title
         expect(page).to have_no_content question.body
       end

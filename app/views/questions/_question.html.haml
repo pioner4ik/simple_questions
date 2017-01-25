@@ -4,13 +4,13 @@
       = render partial: 'partials/votes_table', locals: { object: @question }
     .col-xs-10
       .question-header
-        %h4= question.title.capitalize
+        %h4= question.title
       .card.card-block
         .cart-title
           .text-muted= "By user: #{question.user.email}"
           %hr
         .card-text
-          %p= question.body.capitalize
+          %p= question.body
           .attach_list
             %ul
               - @question.attachments.each do |a|

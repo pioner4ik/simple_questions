@@ -19,7 +19,7 @@
             .text-muted= "By user: #{@author.email}"
             hr
           .card-text   
-            p= @answer.body.capitalize
+            p= @answer.body
             .attach_list
               ul
                 - for attachment in @attachments

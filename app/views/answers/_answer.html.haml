@@ -11,7 +11,7 @@
             .text-muted= "By user: #{answer.user.email}"
             %hr
           .card-text   
-            %p= answer.body.capitalize
+            %p= answer.body
             .attach_list
               %ul
                 - answer.attachments.each do |a|

@@ -1,4 +1,3 @@
-  
 <div class="btn-toolbar">
   <%- if controller_name != 'sessions' %>
     <%= link_to "Log in", new_session_path(resource_name), class: "btn btn-outline-info" %>
@@ -9,14 +8,16 @@
     <%= link_to "Sign up", new_registration_path(resource_name), class: "btn btn-outline-info" %>
     <%= link_to "Back", root_path, class: "btn btn-outline-info" %>
   <% end -%>
-
+</div>
+</br>
+<div class="btn-toolbar">
   <%- if devise_mapping.omniauthable? %>
 
     <%= link_to user_facebook_omniauth_authorize_path, class: "btn btn-primary" do %>
-       <span class="fa fa-facebook"></span>
+       <span class="fa fa-facebook"> Facebook </span>
     <% end %>
     <%= link_to user_vkontakte_omniauth_authorize_path, class: "btn btn-info" do %>
-      <span class="fa fa-vk"></span>
+      <span class="fa fa-vk"> Vkontakte</span>
     <% end %>
 
   <% end -%>

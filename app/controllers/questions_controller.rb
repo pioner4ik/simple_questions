@@ -56,7 +56,7 @@ class QuestionsController < ApplicationController
         question: @question,
         answers_count: @question.answers.count,
         votes_count: @question.votes.count,
-        question_title: @question.title.capitalize}.to_json
+        question_title: @question.title}.to_json
         )
     end
 end
