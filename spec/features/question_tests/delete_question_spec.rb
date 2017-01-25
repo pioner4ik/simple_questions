@@ -1,6 +1,6 @@
 require 'features_helper'
 
-feature "Edit and delete buttons", %q{
+feature "Delete buttons", %q{
   User,who create this question
   Can edit and delete this question
   And other_user cant view buttons

@@ -1,24 +1,32 @@
-.row
-  = render @question
-%br
-%br    
-%h2.text-xs-left Answers
-%hr
-.col-xs-12
+.single-question-block
+  .row
+    = render @question
+  %br
+  %br
+  .offset-xs-2   
+    %h4.text-xs-left Answers
+    %hr
+
   .answers
     = render @question.answers
 
-  - if can? :create, @answer
-    .offset-xs-4.col-xs-8
-      = simple_form_for [ @question, @answer ], remote: true do |f| 
-        = f.input :body, label: "Your answer"
-        .short_attachments
-          = f.simple_fields_for :attachments, @answer.attachments.build do |a|
-            = render 'partials/attachment_fields', f: a
-          .links
-            = link_to_add_association 'add attachment', f, :attachments, partial: "partials/attachment_fields"
-        = f.button :submit, "Create answer", class: "btn btn-info float-xs-right"
-  - else
-    %p.float-xs-right{ style:"color:red;"} Please sign in to answer!
+  .new-answer
+    .offset-xs-2
+      %br
+      .answer-header
+        %h5 Can you help? If you're able to answer this question, please do! 
+      .card
+        .card-block
+          - if can? :create, @answer
+            = simple_form_for [ @question, @answer ], remote: true do |f|
+              = f.input :body, label: "Your answer", required: false
+              .short_attachments
+                = f.simple_fields_for :attachments, @answer.attachments.build do |a|
+                  = render 'partials/attachment_fields', f: a
+                .links
+                  = link_to_add_association 'add attachment', f, :attachments, partial: "partials/attachment_fields"
+              = f.button :submit, "Create answer", class: "btn btn-observ float-xs-right"
+          - else
+            %h5{ style:"color:red;"} Please sign in to answer!
 
     

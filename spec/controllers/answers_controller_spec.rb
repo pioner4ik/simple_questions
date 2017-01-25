@@ -2,19 +2,16 @@ require 'rails_helper'
 
 RSpec.describe AnswersController, type: :controller do
   sign_in_user
-
-  describe "only vote", :pending do
-    let(:question) { create(:question, user: @user ) }
-    let(:answer) { create(:answer, user: @user, question: question) }
-
-    it_behaves_like "votable" do
-      let(:model_name) { answer }
-    end
+  
+  let(:question)    { create(:question, user_id: @user.id ) }
+  let(:other_user)  { create(:user) }
+  
+  it_behaves_like "voted" do  
+    let!(:user_model)   { create(:answer, question: question , user: other_user) }
+    let!(:author_model) { create(:answer, question: question, user: @user) }
   end
 
   describe "POST #create" do
-    let(:question) { create(:question, user_id: @user.id ) }
-
     context "with valid attributes" do
       it "should create new answer in db" do
         expect { process :create,
@@ -47,17 +44,10 @@ RSpec.describe AnswersController, type: :controller do
                  params: { answer: attributes_for(:invalid_answer), question_id: question }
                 }.to_not change(Answer, :count)
       end
-
-      it "render action new and show error messages" do
-        process :create, method: :post, format: :js,
-                params: { answer: attributes_for(:invalid_answer), question_id: question }
-        expect(flash[:danger]).to be_present
-      end
     end
   end
 
   describe "PATCH update" do
-    let(:question) { create(:question, user_id: @user.id) }
     let(:answer)   { create(:answer, user_id: @user.id, question_id: question.id) }
 
     context 'valid attributes' do
@@ -105,9 +95,7 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-
     context "User is author" do
-      let(:question)   { create(:question, user_id: @user.id) }
       let(:answer)     { create(:answer, user_id: @user.id, question_id: question.id) }
 
       before { answer }
@@ -122,7 +110,6 @@ RSpec.describe AnswersController, type: :controller do
     end
 
     context "User is not author" do
-      let(:other_user) { create(:user) }
       let(:question)   { create(:question, user_id: other_user.id) }
       let(:answer)     { create(:answer, user_id: other_user.id, question_id: question.id) }
 
@@ -141,7 +128,6 @@ RSpec.describe AnswersController, type: :controller do
 
   describe "PATCH #answer_best" do
     context "Author user" do
-      let(:question)   { create(:question, user: @user) }
       let!(:answer)    { create(:answer, user: @user, question: question) }
 
       it "Authentication user as author" do
@@ -156,7 +142,6 @@ RSpec.describe AnswersController, type: :controller do
     end
 
     context "Non-author users" do
-      let(:other_user) { create(:user) }
       let(:question)   { create(:question, user: other_user) }
       let!(:answer)    { create(:answer, user: other_user, question: question) }
  

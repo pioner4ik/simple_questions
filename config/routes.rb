@@ -22,7 +22,8 @@ Rails.application.routes.draw do
 
   concern :votable do
     member do
-      post :vote
+      post :vote_up
+      post :vote_down
       delete :re_vote
     end
   end

@@ -4,15 +4,15 @@ RSpec.describe QuestionsController, type: :controller do
   sign_in_user
 
   let(:question) { create(:question, user_id: @user.id) }
+  let(:other_user)    { create(:user) }
 
-  describe "vote#POST", :pending do
-    it_behaves_like "votable" do
-      let(:model_name) { question }
-    end
+  it_behaves_like "voted" do  
+    let!(:user_model)   { create(:question, user: other_user) }
+    let!(:author_model) { create(:question, user: @user) }
   end
 
   describe 'GET #index' do
-    let(:questions) { create_list(:question, 2, user_id: @user.id) }
+    let(:questions) { create_list(:question, 2, user: @user) }
 
     before { get :index }
 
@@ -130,8 +130,6 @@ RSpec.describe QuestionsController, type: :controller do
     sign_in_user
 
     context 'author can delete message' do
-      let(:question) { create(:question, user_id: @user.id) }
-
       before { question }
       
       it 'should delete question' do
@@ -144,15 +142,11 @@ RSpec.describe QuestionsController, type: :controller do
         process :destroy, method: :delete, params: { id: question }
         
         expect(response).to redirect_to questions_path
-        #expect(flash[:danger]).to be_present
       end
     end
 
     context 'non author cant delete question' do
-      let(:other_user) { create(:user) }
-      let(:question)   { create(:question, user_id: other_user.id) }
-
-      before { question }
+      let!(:question)   { create(:question, user: other_user) }
 
       it "should not delete question" do
          expect { process :destroy,

@@ -1,10 +1,7 @@
-$('.flash-messages').replaceWith("<%= j render "partials/flash" %>");
-$('.messages').delay(3000).fadeOut();
+$('.flash-messages').html("<%= j render "partials/flash" %>");
 
-<% if @answer.errors.present? %>
-    <% @answer.errors.full_messages.each do |message| %>
-      $('.error-messages').html('<%= j message %>');
-    <% end %>
+<% if @answer.errors.any? %>
+  $('#answer-' + <%= @answer.id %> ).before("<%= j render "partials/errors", obj: @answer %>");
 <% else %>
   $('#answer-' + <%= @answer.id %> ).replaceWith("<%= j render @answer %>");
 <% end %>

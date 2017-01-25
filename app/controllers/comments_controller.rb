@@ -29,6 +29,10 @@ class CommentsController < ApplicationController
     def publish_comment
       return if @comment.errors.any?
       
-      ActionCable.server.broadcast("question-#{channel_id}-comments", @comment.to_json)
+      ActionCable.server.broadcast("question-#{channel_id}-comments", {
+        comment: @comment,
+        author: @comment.user.email,
+        text: @comment.content}.to_json
+        )
     end
 end

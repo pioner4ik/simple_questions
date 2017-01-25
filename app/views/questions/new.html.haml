@@ -1,12 +1,16 @@
-.offset-xs-3.col-xs-6
+.offset-xs-3.col-xs-7
+  - if @question.errors.any?
+    = render "partials/errors", obj: @question
   %h2 Write you question
-  = simple_form_for @question do |f|
-    = f.input :title
-    = f.input :body
-    %p Attachment
-    .short_attachments
-      = f.simple_fields_for :attachments, @question.attachments.build do |a|
-        = render 'partials/attachment_fields', f: a
-      .links
-        = link_to_add_association 'add', f, :attachments, partial: "partials/attachment_fields"
-    = f.button :submit, "Create", class: "btn btn-info float-xs-right"
+  .card
+    .card-block
+      = simple_form_for @question do |f|
+        = f.input :title, required: false
+        = f.input :body, required: false
+        %p Attachment
+        .short_attachments
+          = f.simple_fields_for :attachments, @question.attachments.build do |a|
+            = render 'partials/attachment_fields', f: a
+          .links
+            = link_to_add_association 'add', f, :attachments, partial: "partials/attachment_fields"
+        = f.button :submit, "Create", class: "btn btn-observ float-xs-right"

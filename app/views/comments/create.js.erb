@@ -1,11 +1,13 @@
-<% if @commentable.errors.present? %>
-  <% @commentable.errors.full_messages.each do |message| %>
-    $('.error-messages').html('<%= j message %>');
-  <% end %>
+$('.flash-messages').html("<%= j render "partials/flash" %>");
+
+commentTable = $('.comments[commentable_id="<%= @commentable.id %>"][commentable_type="<%= @commentable.class %>"]');
+commentContent = $('textarea#comment_content');
+
+<% if @comment.errors.any? %>
+  commentTable.after("<%= j render "partials/errors", obj: @comment %>");
 <% else %>
-  commentTable = $('.comments[commentable_id="<%= @commentable.id %>"][commentable_type="<%= @commentable.class %>"]')
   commentTable.prepend('<%= j render @comment %>');
-  commentTable.find('#comment_content').val('');
+  commentContent.val('');
 <% end %>
 
 

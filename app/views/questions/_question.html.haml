@@ -3,9 +3,11 @@
     .col-xs-2
       = render partial: 'partials/votes_table', locals: { object: @question }
     .col-xs-10
+      .question-header
+        %h4= question.title
       .card.card-block
-        .card-title
-          %h3= question.title
+        .cart-title
+          .text-muted= "By user: #{question.user.email}"
           %hr
         .card-text
           %p= question.body
@@ -22,18 +24,18 @@
             - if can? :update, @question
               = simple_form_for question, remote: true,
               html: { class: "edit-question", id: "edit-question-#{@question.id}"} do |f|
-                = f.input :title
-                = f.input :body
-                = f.submit "Save", class:"btn btn-sm btn-outline-success float-xs-left"
-          .float-xs-right.text-muted= question.user.email
+                = f.input :title, required: false
+                = f.input :body, required: false
+                = f.submit "Save question", class:"btn btn-sm btn-outline-success float-xs-left"
 
       - if can? :update, question
-        = link_to "Edit question", '', class: "edit-question-link btn btn-sm btn-gray quad",
+        = link_to "Edit question", '', class: "edit-question-link btn btn-sm btn-light quad",
         data: { question_id: @question.id }
+
       - if can? :destroy, question  
         = link_to "Delete question", question, method: :delete, data: { confirm: "Are you shure?"},
-        class: "btn btn-sm btn-gray quad"
-  .row
-    .offset-xs-2.col-xs-8
-      = render partial: "partials/comment_form", locals: { commentable: @question }
+        class: "btn btn-sm btn-light quad"
+
+      .comments-block     
+        = render partial: "partials/comment_form", locals: { commentable: @question }
 

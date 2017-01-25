@@ -26,8 +26,9 @@ class Ability
     can [ :update, :destroy ],  [Question, Answer, Comment], { user_id: user.id }
     can :destroy,     Attachment, attachable: { user_id: user.id }
     can :answer_best, Answer,     question: { user_id: user.id }
-    can :vote, [Question, Answer]
-    can :re_vote, Vote, votable: { user_id: user.id }
+    can [:vote_up, :vote_down, :re_vote], [Question, Answer] do |votable|
+      !user.author_of?(votable)
+    end
     can [:read, :me], User
   end
 end

@@ -62,21 +62,13 @@ describe Ability do
     it { should be_able_to :answer_best, create(:answer, question: create(:question, user: user)), user: user }
     it { should_not be_able_to :answer_best, create(:answer, question: create(:question, user: other)), user: user }
 
-    it { should be_able_to :vote, create(:question, user: user), user: user }
-    it { should be_able_to :vote, create(:answer, user: other), user: user }
-
-    it { should be_able_to :re_vote,
-         create(:vote, votable: create(:question, user: user)),
-         user: user }
-    it { should_not be_able_to :re_vote,
-         create(:vote, votable: create(:question, user: other)),
-         user: user }
-
-    it { should be_able_to :re_vote,
-         create(:vote, votable: create(:answer, user: user)),
-         user: user }
-    it { should_not be_able_to :re_vote,
-         create(:vote, votable: create(:answer, user: other)),
-         user: user }
-   end
+    describe "for voted" do
+      %w(vote_up vote_down re_vote).each do |action|
+        it { should be_able_to action.to_sym, create(:question, user: other), user: user }
+        it { should be_able_to action.to_sym, create(:answer, user: other), user: user }
+        it { should_not be_able_to action.to_sym, create(:question, user: user), user: user }
+        it { should_not be_able_to action.to_sym, create(:answer, user: user), user: user }
+      end
+    end
+  end
 end

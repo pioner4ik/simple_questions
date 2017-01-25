@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user!, only: [ :new, :create, :update, :destroy, :vote, :re_vote ]
+  before_action :authenticate_user!, only: [ :new, :create, :update, :destroy, :vote_up, :vote_down, :re_vote ]
   before_action :set_question, only: [:show, :update, :destroy]
   before_action :build_answer, only: :show
   after_action :publish_question, only: :create
@@ -52,6 +52,11 @@ class QuestionsController < ApplicationController
 
     def publish_question
       return if @question.errors.any?
-      ActionCable.server.broadcast('questions', @question.to_json)
+      ActionCable.server.broadcast('questions', {
+        question: @question,
+        answers_count: @question.answers.count,
+        votes_count: @question.votes.count,
+        question_title: @question.title}.to_json
+        )
     end
 end

@@ -31,7 +31,6 @@ feature "Create question", %q{
 
     expect(page).to have_content "Titlecan't be blank"
     expect(page).to have_content "Bodycan't be blank"
-    expect(page).to have_content "Error! Try later"
   end
 
   scenario "Non-authenticated user create question" do
@@ -40,7 +39,7 @@ feature "Create question", %q{
     expect(page).to have_no_content "Ask question"
   end
 
-  context "mulitple sessions", :js do
+  context "mulitple sessions", :js, :pending do
     scenario "question appears on another user's page" do
       Capybara.using_session('user') do
         signup_user
@@ -63,7 +62,6 @@ feature "Create question", %q{
       end
 
       Capybara.using_session('guest') do
-        #save_and_open_page
         expect(page).to have_content 'Test question'
       end
     end
