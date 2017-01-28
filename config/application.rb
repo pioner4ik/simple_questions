@@ -11,6 +11,8 @@ module SimpleQuestions
     # Use the responders controller from the responders gem
     config.app_generators.scaffold_controller :responders_controller
 
+    config.active_job.queue_adapter = :sidekiq
+    
     config.responders.flash_keys = [ :success, :warning, :danger ]
 
     config.action_cable.disable_request_forgery_protection = false
