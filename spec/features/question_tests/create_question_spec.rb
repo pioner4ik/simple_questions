@@ -8,13 +8,8 @@ feature "Create question", %q{
   
   scenario "Authenticated user create question" do
     signup_user
-
-    visit questions_path
-    click_on "Ask question"
-    fill_in "Title", with: "Test question"
-    fill_in "Body", with: "Anybody"
-    click_on "Create"
-
+    create_question
+    
     expect(page).to have_content "Your question successfully created."
     expect(page).to have_content "Test question"
     expect(page).to have_content "Anybody"

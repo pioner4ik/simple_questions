@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [ :new, :create, :update, :destroy, :vote_up, :vote_down, :re_vote ]
   before_action :set_question, only: [:show, :update, :destroy]
-  before_action :build_answer, only: :show
+  before_action :build_answer, :subscribe, only: :show
   after_action :publish_question, only: :create
 
   respond_to :js, only: :update
@@ -48,6 +48,10 @@ class QuestionsController < ApplicationController
 
     def build_answer
       @answer = @question.answers.build
+    end
+
+    def subscribe
+      @subscribtion = @question.subscribtion_for(current_user)
     end
 
     def publish_question

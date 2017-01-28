@@ -70,5 +70,10 @@ describe Ability do
         it { should_not be_able_to action.to_sym, create(:answer, user: user), user: user }
       end
     end
+
+    it { should be_able_to :create, Subscribtion }
+    
+    it { should be_able_to :destroy, create(:subscribtion, user: user), user: user }
+    it { should_not be_able_to :destroy, create(:subscribtion, user: other), user: user }
   end
 end

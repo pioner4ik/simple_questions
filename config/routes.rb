@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   end
 
   resources :questions , concerns: [ :votable, :commentable ] do
+    resources :subscribtions, only: [ :create, :destroy] ,shallow: true
     resources :answers, only: [ :create, :update, :destroy], concerns: [ :votable, :commentable ], shallow: true do
       member { patch :answer_best }
     end
@@ -46,5 +47,5 @@ Rails.application.routes.draw do
 
   resources :attachments, only: :destroy
 
-  mount ActionCable.server => '/cable'
+   mount ActionCable.server => '/cable'
 end
