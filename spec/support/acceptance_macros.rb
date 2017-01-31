@@ -13,4 +13,12 @@ module AcceptanceMacros
     fill_in "Password confirmation", with: "123456", :match => :prefer_exact
     click_on "Sign up"
   end
+
+  def create_question
+    visit questions_path
+    click_on "Ask question"
+    fill_in "Title", with: "Test question"
+    fill_in "Body", with: "Anybody"
+    click_on "Create"
+  end
 end

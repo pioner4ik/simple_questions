@@ -1,0 +1,7 @@
+%h3= "Hello #{@user}.This is Daily digest"
+%h3 New questions
+%ul
+  - @questions.each do |q|
+    %li
+      %h4= q.title
+      %p= q.body

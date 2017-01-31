@@ -1,0 +1,9 @@
+- if can? :create, Subscribtion
+  - if @subscribtion
+    = link_to "Unsubscribe", subscribtion_path(@subscribtion), method: :delete, remote: true,
+    class: "btn btn-sm btn-secondary"
+  - else
+    = link_to "Subscribe", question_subscribtions_path(@question), method: :post, remote: true,
+    class: "btn btn-sm btn-observ"
+
+

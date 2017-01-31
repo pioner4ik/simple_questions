@@ -5,6 +5,8 @@ class Answer < ApplicationRecord
 
   default_scope -> { order("best DESC") }
 
+  after_create { QuestionSubscribtionsJob.perform_later(self) }
+
   belongs_to :user
   belongs_to :question
 

@@ -7,6 +7,9 @@
         %h4= question.title
       .card.card-block
         .cart-title
+          .float-xs-right
+            #follow_button
+              = render 'partials/subscribtion_button'
           .text-muted= "By user: #{question.user.email}"
           %hr
         .card-text
