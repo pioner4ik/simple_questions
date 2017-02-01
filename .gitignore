@@ -19,3 +19,5 @@
 /public/uploads
 config/database.yml
 config/secrets.yml
+config/*.sphinx.conf
+db/sphinx

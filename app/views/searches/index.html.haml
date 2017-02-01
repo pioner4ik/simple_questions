@@ -1,0 +1,13 @@
+.search-result
+  - if @questions.any?
+    %h3{style: "font-weight: bold;"} Search result
+    %hr
+    %ul  
+      #questions
+        - @questions.each do |q|
+          .question-block
+            %li
+              %h5= link_to q.title, question_path(q)
+            %hr
+  - else
+    %h3{style: "font-weight: bold;"} Search not found
