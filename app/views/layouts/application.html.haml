@@ -15,7 +15,7 @@
           %h4= link_to "Simple Questions", root_path, id: "logotip"
         .navbar.navbar-brand
           #search_field
-            = render 'partials/search'
+            = render 'searches/search'
 
         - if user_signed_in?
           .nav.navbar-nav.float-xs-right

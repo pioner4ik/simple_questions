@@ -1,0 +1,11 @@
+- @search.each do |search|
+  -case search.class.to_s
+    -when 'Question'
+      = render 'searches/search_templates/questions', search: search
+    - when 'Answer'
+      = render 'searches/search_templates/answers', search: search
+    - when 'Comment'
+      = render 'searches/search_templates/comments', search: search
+    - when 'User'
+      = render 'searches/search_templates/users', search: search
+

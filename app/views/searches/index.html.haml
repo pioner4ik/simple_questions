@@ -1,13 +1,25 @@
+%br
 .search-result
-  - if @questions.any?
-    %h3{style: "font-weight: bold;"} Search result
+
+  - if @search.any?
+    %h4{style: "font-weight: bold;"}=  "Found " + pluralize(@search.count, "result")
     %hr
-    %ul  
-      #questions
-        - @questions.each do |q|
-          .question-block
-            %li
-              %h5= link_to q.title, question_path(q)
-            %hr
+    = will_paginate @search, :renderer => WillPaginate::ActionView::BootstrapLinkRenderer
+    - case @category
+      - when 'Question'
+        - @search.each do |search|
+          = render 'searches/search_templates/questions' , search: search
+      - when 'Answer'
+        - @search.each do |search|
+          = render 'searches/search_templates/answers', search: search
+      - when 'User'
+        - @search.each do |search|
+          = render 'searches/search_templates/users', search: search
+      - when 'Comment'
+        - @search.each do |search|
+          = render 'searches/search_templates/comments', search: search
+      - when 'All'
+        = render 'searches/search_templates/all'
+
   - else
-    %h3{style: "font-weight: bold;"} Search not found
+    %h4{style: "font-weight: bold;"} Search not found

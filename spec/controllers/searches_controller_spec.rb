@@ -4,7 +4,7 @@ RSpec.describe SearchesController, type: :controller do
 
   describe "GET #index" do
     it "render index view" do
-      get :index, params: { search: "Search" }
+      get :index, params: { category: "all", search: "Search" }
       expect(response).to render_template :index
     end
   end
