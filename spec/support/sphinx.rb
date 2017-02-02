@@ -12,6 +12,7 @@ end
 
 RSpec.configure do |config|
   config.include SphinxHelpers, type: :feature
+  config.include SphinxHelpers, type: :model
 
   config.before(:suite) do
     ThinkingSphinx::Test.init
