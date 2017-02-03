@@ -42,6 +42,7 @@ gem 'thinking-sphinx'
 gem 'will_paginate-bootstrap4'
 gem 'dotenv'
 gem 'dotenv-deployment', require: 'dotenv/deployment'
+gem 'therubyracer'  
 
 group :development do
   gem 'capistrano', require: false
