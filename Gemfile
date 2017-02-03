@@ -33,13 +33,22 @@ gem 'active_model_serializers'
 gem 'oj'
 gem 'oj_mimic_json'
 #gem 'delayed_job_active_record'
-#gem 'whenever'
+gem 'whenever'
 gem 'sidekiq'
 gem 'sinatra', require: nil
 gem 'sidetiq'
 gem 'mysql2'
 gem 'thinking-sphinx'
 gem 'will_paginate-bootstrap4'
+gem 'dotenv'
+gem 'dotenv-deployment', require: 'dotenv/deployment'
+
+group :development do
+  gem 'capistrano', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-rvm', require: false
+end
 
 group :development, :test do
   gem 'rspec-rails'
