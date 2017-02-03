@@ -17,9 +17,10 @@ OmniAuth.config.test_mode = true
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
-  config.use_transactional_fixtures = true
+
+  #fixtures config search in support/db_cleaner.rb
+  
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
 

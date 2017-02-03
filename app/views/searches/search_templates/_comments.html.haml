@@ -1,0 +1,13 @@
+.question-block
+  %ul
+    %li
+      %h6
+        content: 
+        %span= link_to search.content, question_path(search)
+        | user:
+        %span= search.user.email
+        |
+        = search.commentable_type + ": "
+        %span= search.commentable_id
+        .float-xs-right.text-muted= "detected in #{search.class.to_s.downcase.pluralize}"
+  %hr

@@ -1,0 +1,12 @@
+.question-block
+  %ul
+    %li
+      %h6
+        title: 
+        %span= link_to search.title, question_path(search)
+        | body:
+        %span= link_to search.body, question_path(search)
+        | user:
+        %span= search.user.email
+        .float-xs-right.text-muted= "detected in #{search.class.to_s.downcase.pluralize}"
+  %hr

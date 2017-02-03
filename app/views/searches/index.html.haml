@@ -1,0 +1,15 @@
+%br
+.search-result
+  - if @search.any?
+    %h4{style: "font-weight: bold;"}=  "Found " + pluralize(@search.count, "result")
+    %hr
+    = will_paginate @search, :renderer => WillPaginate::ActionView::BootstrapLinkRenderer
+
+    - if @category = 'all'
+      = render "searches/search_templates/all" , search: @search
+    - else
+      - @search.each do |search|
+        = render "searches/search_templates/#{@category.class.to_s.downcase.pluralize}" , search: search
+
+  - else
+    %h4{style: "font-weight: bold;"} Search not found
