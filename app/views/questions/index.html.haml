@@ -1,21 +1,22 @@
-#questions-main
-  %h3{style: "font-weight: bold;"} Top questions
-  %hr
-  %ul  
-    #questions
-      - @questions.each do |q|
-        .question-block
-          %li
-            %ul
-              %li
-                .status-block
-                  %p= q.votes.count 
-                  %p votes
-              %li    
-                .status-block
-                  %p= q.answers.count 
-                  %p answers
-              %li
-                %h5= link_to q.title, question_path(q)
-              %hr
+- cache collection_cache_key_for :question do
+  #questions-main
+    %h3{style: "font-weight: bold;"} Top questions
+    %hr
+    %ul  
+      #questions
+        - @questions.each do |q|
+          .question-block
+            %li
+              %ul
+                %li
+                  .status-block
+                    %p= q.votes.count 
+                    %p votes
+                %li    
+                  .status-block
+                    %p= q.answers.count 
+                    %p answers
+                %li
+                  %h5= link_to q.title, question_path(q)
+                %hr
 
