@@ -17,14 +17,14 @@ feature "Add some files to answer", %q{
 
   scenario "User adds files to answer", :pending, js: true do
     fill_in "Your answer", with: "My Answer"
-    #click_on "add"
+    click_on "add"
     inputs = all('input[type="file"]')
     inputs[0].set("#{Rails.root}/spec/rails_helper.rb")
-    #inputs[1].set("#{Rails.root}/spec/spec_helper.rb")
+    inputs[1].set("#{Rails.root}/spec/spec_helper.rb")
     click_on "Create answer"
 
-    expect(page).to have_link "rails_helper.rb"#, href: "/uploads/attachment/file/2/rails_helper.rb"
-    #expect(page).to have_link "spec_helper.rb"#, href: "/uploads/attachment/file/3/spec_helper.rb"
+    expect(page).to have_link "rails_helper.rb", href: "/uploads/attachment/file/2/rails_helper.rb"
+    expect(page).to have_link "spec_helper.rb", href: "/uploads/attachment/file/3/spec_helper.rb"
   end
 
   scenario "remove files from answer",js: true do

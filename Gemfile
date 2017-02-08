@@ -32,7 +32,6 @@ gem 'doorkeeper'
 gem 'active_model_serializers'
 gem 'oj'
 gem 'oj_mimic_json'
-#gem 'delayed_job_active_record'
 gem 'whenever'
 gem 'sidekiq'
 gem 'sinatra', require: nil
@@ -74,4 +73,3 @@ end
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
 end
-# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

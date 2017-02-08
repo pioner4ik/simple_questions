@@ -1,11 +1,5 @@
 require 'features_helper'
-# все проходит, проблема заключалась в названии ссылок
-# unsubscribe i subscribe имеют общий корень и капибара путалась потому что видела обе ссылки
-# поменял на Unsubscribe i Subscribe
-# проблема номер 2 заключалась то что не видит блок .question да и любой другой
-# проблема не критична потому что на странице вопрос единственный
-# если бы мы подписывались на массив комментов ответа
-# то тогда нам нужен был бы блок а-ля #answer-#{answer.id}
+
 feature "Create subscribtion", %q{
   All user can subscribe to question,
   and after than they receive answer

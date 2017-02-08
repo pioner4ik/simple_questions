@@ -16,8 +16,8 @@ feature "Answer editing", %q{
 
     expect(page).to_not have_link "Edit"
   end
-=begin
-  describe "Authenticated user as author of answer" do
+
+  describe "Authenticated user as author of answer", :pending do
     before do
       log_in user
       visit question_path(question)
@@ -36,7 +36,7 @@ feature "Answer editing", %q{
       end
     end
   end
-=end
+
   describe "Authenticated user as non-author of answer" do
     before do
       log_in other_user

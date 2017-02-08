@@ -16,7 +16,6 @@ Can create answer
     fill_in "Your answer", with: "My Answer"
     click_on "Create answer"
 
-    #expect(page).to have_content "Congratulations! Answer created!"
     within ".answers" do
       expect(page).to have_content "My Answer"
     end
@@ -29,7 +28,6 @@ Can create answer
     fill_in "Your answer", with: nil
     click_on "Create answer"
 
-    #expect(page).to have_content "Answer is not created! Try later!"
     expect(page).to have_content "Body can't be blank"
   end  
 
