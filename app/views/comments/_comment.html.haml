@@ -1,6 +1,5 @@
 - if comment.persisted?
-  - cache comment do
-    %h6{style: "color:#828282;"}= "By: #{comment.user.email}"
-    .comment
-      %p= comment.content
-    %br
+  %h6{style: "color:#828282;"}= "By: #{comment.user.email}"
+  .comment
+    %p= comment.content
+  %br

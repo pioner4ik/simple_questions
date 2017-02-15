@@ -1,41 +1,40 @@
 - if answer.persisted?
-  - cache answer do
-    .row
-      .answer{ id: "answer-#{answer.id}"}
-        .col-xs-2
-          = render partial: 'partials/votes_table', locals: { object: answer }
-          - if answer.best?
-            #best-marker.fa.fa-check.fa-2x.observ
-        .col-xs-10
-          .card.card-block
-            .cart-title
-              .text-muted= "By user: #{answer.user.email}"
-              %hr
-            .card-text   
-              %p= answer.body
-              .attach_list
-                %ul
-                  - answer.attachments.each do |a|
-                    %li{id: "attachment-#{a.id}"}
-                      .fa.fa-file-o
-                      = link_to a.file.identifier, a.file.url
-                      - if a.persisted? && can?(:destroy, a.attachable)
-                        = link_to "del", a, method: :delete, remote: true, class: "btn red"
+  .row
+    .answer{ id: "answer-#{answer.id}"}
+      .col-xs-2
+        = render partial: 'partials/votes_table', locals: { object: answer }
+        - if answer.best?
+          #best-marker.fa.fa-check.fa-2x.observ
+      .col-xs-10
+        .card.card-block
+          .cart-title
+            .text-muted= "By user: #{answer.user.email}"
+            %hr
+          .card-text   
+            %p= answer.body
+            .attach_list
+              %ul
+                - answer.attachments.each do |a|
+                  %li{id: "attachment-#{a.id}"}
+                    .fa.fa-file-o
+                    = link_to a.file.identifier, a.file.url
+                    - if a.persisted? && can?(:destroy, a.attachable)
+                      = link_to "del", a, method: :delete, remote: true, class: "btn red"
 
-          - if !answer.best? && can?(:answer_best, answer)
-            = link_to 'make best', answer_best_answer_path(answer), method: :patch,
-            remote: true, class: "make-best-button btn btn-sm btn-light quad"
+        - if !answer.best? && can?(:answer_best, answer)
+          = link_to 'make best', answer_best_answer_path(answer), method: :patch,
+          remote: true, class: "make-best-button btn btn-sm btn-light quad"
 
-          - if can? :update, answer
-            = simple_form_for answer, remote: true, html: { class:"edit-answer",id: "edit-answer-#{answer.id}"} do |f|
-              = f.input :body, required: false
-              = f.submit "Save", class:"btn btn-sm btn-outline-success"
-            = link_to "Edit", '', class: 'edit-answer-link btn btn-sm btn-light quad', data: { answer_id: answer.id }
+        - if can? :update, answer
+          = simple_form_for answer, remote: true, html: { class:"edit-answer",id: "edit-answer-#{answer.id}"} do |f|
+            = f.input :body, required: false
+            = f.submit "Save", class:"btn btn-sm btn-outline-success"
+          = link_to "Edit", '', class: 'edit-answer-link btn btn-sm btn-light quad', data: { answer_id: answer.id }
 
-          - if can? :destroy, answer
-            = link_to "Delete", answer, method: :delete, remote: true, class:"btn btn-sm btn-light quad"   
-          %br
-          = render partial: "partials/comment_form", locals: { commentable: answer }
-  .offset-xs-2    
-    %hr
+        - if can? :destroy, answer
+          = link_to "Delete", answer, method: :delete, remote: true, class:"btn btn-sm btn-light quad"   
+        %br
+        = render partial: "partials/comment_form", locals: { commentable: answer }
+.offset-xs-2    
+  %hr
 

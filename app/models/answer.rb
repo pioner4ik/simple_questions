@@ -8,7 +8,7 @@ class Answer < ApplicationRecord
   after_create { QuestionSubscribtionsJob.perform_later(self) }
 
   belongs_to :user
-  belongs_to :question, touch: true
+  belongs_to :question
 
   validates :body, presence: true
 
