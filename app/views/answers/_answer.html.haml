@@ -32,9 +32,17 @@
           = link_to "Edit", '', class: 'edit-answer-link btn btn-sm btn-light quad', data: { answer_id: answer.id }
 
         - if can? :destroy, answer
-          = link_to "Delete", answer, method: :delete, remote: true, class:"btn btn-sm btn-light quad"   
-        %br
-        = render partial: "partials/comment_form", locals: { commentable: answer }
-.offset-xs-2    
-  %hr
+          = link_to "Delete", answer, method: :delete, remote: true, class:"btn btn-sm btn-light quad"
 
+        = link_to "View comments", "", class: "show-comments btn btn-light btn-sm quad",
+        remote: true, data: { commentable_id: answer.id, commentable_type: "answer" }
+
+        = link_to "Hide comments", "", class: "hide-comments btn btn-light btn-sm quad",
+        remote: true, data: { commentable_id: answer.id, commentable_type: "answer" },
+        style: "display:none;"
+        
+        .for-capybara-comments-test
+          .comments-block{ id: "comments-answer-#{answer.id}"}
+            = render partial: "partials/comment_form", locals: { commentable: answer }
+  .offset-xs-2
+    %hr
