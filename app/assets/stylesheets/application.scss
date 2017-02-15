@@ -1,6 +1,6 @@
 /*
  *= require bootstrap-custom
- *= require login-form
+ *= require devise
  */
 
 @import "bootstrap";
@@ -48,6 +48,8 @@ ul{ list-style-type: none; }
   background-color: white;
   box-shadow: 0 0 1px $muted;
 }
+
+.comments-block{ display: none; }
 
 .comment-form{
   form{

@@ -39,5 +39,13 @@
         = link_to "Delete question", question, method: :delete, data: { confirm: "Are you shure?"},
         class: "btn btn-sm btn-light quad"
 
-      .comments-block     
-        = render partial: "partials/comment_form", locals: { commentable: @question }
+      = link_to "View comments", "", class: "show-comments btn btn-light btn-sm quad",
+      remote: true, data: { commentable_id: question.id, commentable_type: "question" }
+
+      = link_to "Hide comments", "", class: "hide-comments btn btn-light btn-sm quad",
+      remote: true, data: { commentable_id: question.id, commentable_type: "question" },
+      style: "display:none;"
+
+      .for-capybara-comments-test
+        .comments-block{ id: "comments-question-#{question.id}"}
+          = render partial: "partials/comment_form", locals: { commentable: @question }

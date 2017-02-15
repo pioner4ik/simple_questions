@@ -1,13 +1,12 @@
-.login-form
-  %h2 Sign in
+.devise-container
+  %h3 Welcome Back
   = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
     .form-input
       = f.input :email, required: false, autofocus: true, label: false, placeholder: "Email"
       = f.input :password, required: false, label: false, placeholder: "Password"
-    .login-button
-      = f.button :submit, "Log in"
-    %br  
     .form-check  
       = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
-  %h5 Allready has Account?
+    .auth-button
+      = f.submit "Log in", class: "btn btn-success"
+  %br
   = render "devise/shared/links"

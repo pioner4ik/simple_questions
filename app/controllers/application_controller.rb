@@ -2,7 +2,6 @@ require "application_responder"
 
 class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
-  layout :layout_by_resource
   
   respond_to :html
 
@@ -20,9 +19,5 @@ class ApplicationController < ActionController::Base
 
     def gon_user
       gon.user_id = current_user.id if current_user
-    end
-
-    def layout_by_resource
-      (devise_controller? && action_name == "new") ? "devise" : "application"
     end
 end
