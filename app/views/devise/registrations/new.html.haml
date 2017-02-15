@@ -1,16 +1,14 @@
-.login-form
-  %h2 Sign up
-  %hr
+.devise-container
+  %h3 Sign up
   = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
     = f.error_notification
     .form-input
       = f.input :email, required: true, autofocus: true, label: false, placeholder: "Email"
       = f.input :password, required: true, label: false, placeholder: "Password"
       = f.input :password_confirmation, required: true, label: false, placeholder: "Password confirmation"
-    .login-button
-      = f.button :submit, "Sign up"
+    .auth-button
+      = f.button :submit, "Sign up", class: "btn btn-success"
   %br
   %h5 Allready has Account?
   %br
   = render "devise/shared/links"
-

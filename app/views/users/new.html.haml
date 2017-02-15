@@ -1,12 +1,10 @@
-.login-form
-  %br
-  %br
-  %h4 Please enter your email to finish registration
+.devise-container
+  %h3 Please enter your email to finish registration
   %br
   = simple_form_for @user, url: create_user_with_email_users_path do |f|
     .form-input
       = f.input :email, placeholder: "Write your email here", label: false
-    .login-button
-      = f.submit "Email vertification"
+    .auth-button
+      = f.submit "Email vertification", class: "btn btn-success"
   %br    
   %p= link_to "Back to registration", new_user_registration_path
