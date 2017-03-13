@@ -9,4 +9,4 @@
 config/database.yml
 config/*.sphinx.conf
 db/sphinx
-db/seeds.rb
+db/seeds.rb 
